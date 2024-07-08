@@ -67,19 +67,24 @@ function Courses() {
       </section>
 
       <section className="container overflow-hidden py-5">
-        <div className="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 courses">
-
-          {courses.map(course => (
-
-            <CourseBox
-              courseName = {course.course_name}
-              courseOutline = {course.course_outline}
-            />
-
-          ))}
-
-        </div>
-      </section>
+                <div className="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 courses">
+                    {loading ? (
+                        <p>Loading courses...</p>
+                    ) : error ? (
+                        <p>Error: {error}</p>
+                    ) : courses && courses.length > 0 ? (
+                        courses.map((course, index) => (
+                            <CourseBox
+                                key={index}
+                                courseName={course.course_name}
+                                courseOutline={course.course_outline}
+                            />
+                        ))
+                    ) : (
+                        <p>No courses available.</p>
+                    )}
+                </div>
+            </section>
       <Footer/>
     </div>
   )

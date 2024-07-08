@@ -13,7 +13,7 @@ import {
   COURSE_UPDATE_FAIL,
   COURSE_DELETE_REQUEST,
   COURSE_DELETE_SUCCESS,
-  COURSE_DELETE_FAIL} from '../../constants/courseConstants'
+  COURSE_DELETE_FAIL} from '../constants/courseConstants'
 
 export const courseListReducer = (state = { courses: [] }, action) => {
 	switch (action.type) {

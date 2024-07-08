@@ -5,7 +5,7 @@ import {
 	TEACHER_LOGOUT,
 	TEACHER_REGISTER_REQUEST,
 	TEACHER_REGISTER_SUCCESS,
-	TEACHER_REGISTER_FAIL } from '../../constants/teacherConstants'
+	TEACHER_REGISTER_FAIL } from '../constants/teacherConstants'
 
 export const teacherLoginReducer = (state = {}, action) => {
 	switch (action.type) {

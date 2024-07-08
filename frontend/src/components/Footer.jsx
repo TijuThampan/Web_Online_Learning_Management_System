@@ -103,14 +103,14 @@ function Footer() {
                   <i className='bi-chevron-right'></i>
                   <NavLink className="text-decoration-none text-light" to="/" exact>Privacy Policy</NavLink>
                 </li>
-                <li className="pb-2">
+                {/* <li className="pb-2">
                   <i className='bi-chevron-right'></i>
                   <NavLink className="text-decoration-none text-light" to="/contact" exact>Contact</NavLink>
                 </li>
                 <li className="pb-2">
                   <i className='bi-chevron-right'></i>
                   <a className="text-decoration-none text-light" href="mailto:0n3.a77@gmail.com">0n3.a77@gmail.com</a>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
@@ -120,13 +120,13 @@ function Footer() {
             <div className="row pt-2">
               <div className="col-lg-6 col-sm-12">
                 <p className="text-lg-start text-center text-light light-300">
-                  &copy; Copyright {(new Date().getFullYear())} One.all Company. All Rights Reserved.
+                  &copy; Copyright {(new Date().getFullYear())} All Rights Reserved.
                 </p>
               </div>
               <div className="col-lg-6 col-sm-12">
-                <p className="text-lg-end text-center text-light light-300">
+                {/* <p className="text-lg-end text-center text-light light-300">
                   Designed by <a rel="noreferrer" className="text-decoration-none text-light" href="https://www.onedotall.in" target="_blank"><strong>One.all</strong></a>
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

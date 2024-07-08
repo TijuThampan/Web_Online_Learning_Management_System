@@ -11,7 +11,7 @@ function Home() {
       {/* {teacherInfo ? (<TeacherTabs/>) : ("")} */}
       <Banner/>
       <Mission/>
-      <Features/>
+     <Features/>
       <Footer/>
     </div>
   )

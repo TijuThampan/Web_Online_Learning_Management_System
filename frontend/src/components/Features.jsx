@@ -46,15 +46,22 @@ function Features() {
               <h2 className="col-md-6 m-auto h2 semi-bold-600 py-5">Our Popular Courses</h2>
             </div>
             <div className="row gy-5 g-lg-5 mb-4">
-              {courses.map(course => (
-
-                <CourseBox
-                  courseName = {course.course_name}
-                  courseOutline = {course.course_outline}
-                />
-
-              ))}
-            </div>
+                        {loading ? (
+                            <p>Loading courses...</p>
+                        ) : error ? (
+                            <p>Error: {error}</p>
+                        ) : courses && courses.length > 0 ? (
+                            courses.map((course, index) => (
+                                <CourseBox
+                                    key={index}
+                                    courseName={course.course_name}
+                                    courseOutline={course.course_outline}
+                                />
+                            ))
+                        ) : (
+                            <p>No courses available.</p>
+                        )}
+                    </div>
         </div>
       </section>
     </div>
