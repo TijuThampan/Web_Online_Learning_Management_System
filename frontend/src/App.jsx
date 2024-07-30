@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./screens/Home";
 import About from "./screens/About";
@@ -16,7 +21,7 @@ import AddQuestion from "./screens/AddQuestion";
 import StudentLogin from "./screens/StudentLogin";
 import StudentRegister from "./screens/StudentRegister";
 import StudentDash from "./screens/StudentDash";
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
@@ -24,23 +29,6 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          {/* <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/courses" component={Courses} />
-          <Route exact path="/tests" component={Tests} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/notices" component={Notices} />
-          <Route exact path="/teacher_login" component={TeacherLogin} />
-          <Route exact path="/teacher_register" component={TeacherRegister} />
-          <Route exact path="/teacher_dashboard" component={TeacherDash} />
-          <Route exact path="/teacher_courses" component={TeacherCourses} />
-          <Route exact path="/teacher_tests" component={TeacherTests} />
-          <Route exact path="/add_question" component={AddQuestion} />
-          <Route exact path="/student_login" component={StudentLogin} />
-          <Route exact path="/student_register" component={StudentRegister} />
-          <Route exact path="/student_dashboard" component={StudentDash} />
-          <Navigate to="/" /> */}
-
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/courses" element={<Courses />} />
@@ -58,7 +46,6 @@ function App() {
           <Route path="/student_dashboard" element={<StudentDash />} />
           {/* Add other routes as needed */}
           <Route path="*" element={<Navigate to="/" replace />} />
-
         </Routes>
       </Router>
     </div>
