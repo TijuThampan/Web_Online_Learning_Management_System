@@ -1,9 +1,10 @@
-import express from "express";
 import dotenv from "dotenv";
+import express from "express";
 import connectDB from "./config/db.js";
-import teacherRoutes from "./routes/teacherRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
+import examRoutes from "./routes/examRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
+import teacherRoutes from "./routes/teacherRoutes.js";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 app.use("/api/teacher", teacherRoutes);
 app.use("/api/course", courseRoutes);
 app.use("/api/student", studentRoutes);
+app.use("/api/exam", examRoutes);
 
 const port = 8000 || process.env.PORT;
 
