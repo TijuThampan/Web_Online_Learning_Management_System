@@ -1,16 +1,15 @@
 import asyncHandler from "express-async-handler";
 import Exam from "../models/examModel.js";
+import Question from "../models/questionModel.js";
 
 // @desc    Create an exam
 // @route   POST /api/exam/create
 // @access  Private (Teacher)
 export const createExam = asyncHandler(async (req, res) => {
-  const { exam_name, no_of_questions, total_marks, total_time, course } =
-    req.body;
+  const { exam_name, total_marks, total_time, course } = req.body;
 
   const exam = new Exam({
     exam_name,
-    no_of_questions,
     total_marks,
     total_time,
     course,
@@ -36,21 +35,26 @@ export const getTeacherExams = asyncHandler(async (req, res) => {
     "course_name"
   );
 
-  res.json(exams);
+  const examsWithQuestionCount = await Promise.all(
+    exams.map(async (exam) => {
+      const questionCount = await Question.countDocuments({ exam: exam._id });
+      return { ...exam.toObject(), no_of_questions: questionCount };
+    })
+  );
+
+  res.json(examsWithQuestionCount);
 });
 
 // @desc    Update an exam
 // @route   PUT /api/exam/:id
 // @access  Private (Teacher)
 export const updateExam = asyncHandler(async (req, res) => {
-  const { exam_name, no_of_questions, total_marks, total_time, active } =
-    req.body;
+  const { exam_name, total_marks, total_time, active } = req.body;
 
   const exam = await Exam.findById(req.params.id);
 
   if (exam) {
     exam.exam_name = exam_name || exam.exam_name;
-    exam.no_of_questions = no_of_questions || exam.no_of_questions;
     exam.total_marks = total_marks || exam.total_marks;
     exam.total_time = total_time || exam.total_time;
     exam.active = active !== undefined ? active : exam.active;
@@ -88,7 +92,12 @@ export const getExamById = asyncHandler(async (req, res) => {
   );
 
   if (exam) {
-    res.json(exam);
+    const questionCount = await Question.countDocuments({ exam: exam._id });
+    const examWithQuestionCount = {
+      ...exam.toObject(),
+      no_of_questions: questionCount,
+    };
+    res.json(examWithQuestionCount);
   } else {
     res.status(404);
     throw new Error("Exam not found");
