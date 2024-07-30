@@ -1,23 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import bck from "../assets/img/workspace.jpg";
-import Footer from "../components/Footer";
+import bck from "../../assets/img/workspace.jpg";
+import Footer from "../../components/Footer";
 
-function StudentDash() {
+function TeacherDash({ history }) {
+  const teacherLogin = useSelector((state) => state.teacherLogin);
+  const { loading, error, teacherInfo } = teacherLogin;
+
+  useEffect(() => {
+    if (!teacherInfo) {
+      history.push("/");
+    }
+  }, [history, teacherInfo]);
+
   return (
     <div>
       <section>
         <div id="page_banner2" className="banner-wrapper bg-light w-100 py-5">
           <div className="container text-light d-flex justify-content-center align-items-center py-5 p-0">
-            <div className="banner-content col-lg-8 col-12 m-lg-auto text-center">
+            <div className="banner-content col-12 m-lg-auto text-center">
               <h1 className="banner-heading display-3 pb-5 semi-bold-600 typo-space-line-center">
-                Student Dashboard
+                Teacher Dashboard
               </h1>
 
               <div className="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 m-0">
                 <div className="col-xl-3 col-md-4 col-sm-6">
                   <NavLink
-                    to="/"
+                    to="/teacher_courses"
                     exact
                     className="course card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0"
                   >
@@ -38,7 +48,7 @@ function StudentDash() {
 
                 <div className="col-xl-3 col-md-4 col-sm-6">
                   <NavLink
-                    to="/"
+                    to="/teacher_tests"
                     exact
                     className="course card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0"
                   >
@@ -108,4 +118,4 @@ function StudentDash() {
   );
 }
 
-export default StudentDash;
+export default TeacherDash;

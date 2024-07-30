@@ -12,15 +12,15 @@ import Courses from "./screens/Courses";
 import Tests from "./screens/Tests";
 import Contact from "./screens/Contact";
 import Notices from "./screens/Notices";
-import TeacherLogin from "./screens/TeacherLogin";
-import TeacherRegister from "./screens/TeacherRegister";
-import TeacherDash from "./screens/TeacherDash";
-import TeacherCourses from "./screens/TeacherCourses";
-import TeacherTests from "./screens/TeacherTests";
-import AddQuestion from "./screens/AddQuestion";
-import StudentLogin from "./screens/StudentLogin";
-import StudentRegister from "./screens/StudentRegister";
-import StudentDash from "./screens/StudentDash";
+import TeacherLogin from "./screens/teacher/TeacherLogin";
+import TeacherRegister from "./screens/teacher/TeacherRegister";
+import TeacherDash from "./screens/teacher/TeacherDash";
+import TeacherCourses from "./screens/teacher/TeacherCourses";
+import TeacherTests from "./screens/teacher/TeacherTests";
+import AddQuestion from "./screens/teacher/AddQuestion";
+import StudentLogin from "./screens/student/StudentLogin";
+import StudentRegister from "./screens/student/StudentRegister";
+import StudentDash from "./screens/student/StudentDash";
 import "./App.css";
 
 function App() {

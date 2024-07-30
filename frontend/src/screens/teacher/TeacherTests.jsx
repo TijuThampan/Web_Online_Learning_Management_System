@@ -1,7 +1,7 @@
 import React from "react";
-import TeacherTabs from "../components/TeacherTabs";
-import TestForTeacher from "../components/TestForTeacher";
-import Footer from "../components/Footer";
+import TeacherTabs from "../../components/TeacherTabs";
+import TestForTeacher from "../../components/TestForTeacher";
+import Footer from "../../components/Footer";
 
 function TeacherTests() {
   return (

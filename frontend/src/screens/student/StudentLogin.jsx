@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../actions/teacherActions";
 import { NavLink, useNavigate } from "react-router-dom";
-//import Spinner from '../components/Spinner';
-import Alert from "../components/Alert";
-import Footer from "../components/Footer";
+import { login } from "../../actions/studentActions";
+import Alert from "../../components/Alert";
+import Footer from "../../components/Footer";
 
-function TeacherLogin() {
+function StudentLogin() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -14,15 +13,15 @@ function TeacherLogin() {
 
   const dispatch = useDispatch();
 
-  const { loading, error, teacherInfo } = useSelector(
-    (state) => state.teacherLogin
+  const { loading, error, studentInfo } = useSelector(
+    (state) => state.studentLogin
   );
 
   useEffect(() => {
-    if (teacherInfo) {
-      navigate("/teacher_dashboard");
+    if (studentInfo) {
+      navigate("/student_dashboard");
     }
-  }, [teacherInfo]);
+  }, [studentInfo, navigate]);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -37,7 +36,7 @@ function TeacherLogin() {
             <div className="banner-content col-lg-8 col-12 m-lg-auto text-center">
               {error && <Alert type="danger">{error}</Alert>}
               <h1 className="banner-heading display-3 pb-5 semi-bold-600 typo-space-line-center">
-                Teacher Login
+                Student Login
               </h1>
               <div className="col-md-8 mx-auto my-5 text-dark">
                 <form className="contact_form row" onSubmit={submitHandler}>
@@ -46,16 +45,14 @@ function TeacherLogin() {
                       <input
                         type="text"
                         className="form-control form-control-lg light-300"
-                        value={email}
                         id="email"
                         name="email"
                         placeholder="Email*"
-                        onChange={(event) => {
-                          setEmail(event.target.value);
-                        }}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                       />
-                      <label for="email light-300">Email*</label>
+                      <label htmlFor="email light-300">Email*</label>
                     </div>
                   </div>
                   <div className="col-lg-6 mb-4">
@@ -63,16 +60,14 @@ function TeacherLogin() {
                       <input
                         type="password"
                         className="form-control form-control-lg light-300"
-                        value={password}
                         id="password"
                         name="password"
                         placeholder="Password*"
-                        onChange={(event) => {
-                          setPassword(event.target.value);
-                        }}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                       />
-                      <label for="password light-300">Password*</label>
+                      <label htmlFor="password light-300">Password*</label>
                     </div>
                   </div>
                   <div className="col-md-12 col-12 mx-auto my-3">
@@ -86,15 +81,15 @@ function TeacherLogin() {
                 </form>
               </div>
               <div className="col-10 col-md-8 mx-auto my-5 d-flex justify-content-around">
-                <NavLink to="/student_login" exact>
+                <NavLink to="/teacher_login" exact>
                   <button
                     type="button"
                     className="btn rounded-pill btn-light px-4"
                   >
-                    Student Login
+                    Teacher Login
                   </button>
                 </NavLink>
-                <NavLink to="/teacher_register" exact>
+                <NavLink to="/student_register" exact>
                   <button
                     type="button"
                     className="btn rounded-pill btn-outline-info px-4"
@@ -112,4 +107,4 @@ function TeacherLogin() {
   );
 }
 
-export default TeacherLogin;
+export default StudentLogin;

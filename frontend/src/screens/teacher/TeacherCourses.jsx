@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createCourse, getSpecificCourses } from "../actions/courseActions";
-import Alert from "../components/Alert";
-import Spinner from "../components/Spinner";
-import TeacherNavs from "../components/TeacherNavs";
-import CourseForTeacher from "../components/CourseForTeacher";
-import Footer from "../components/Footer";
+import { createCourse, getSpecificCourses } from "../../actions/courseActions";
+import Alert from "../../components/Alert";
+import Spinner from "../../components/Spinner";
+import TeacherNavs from "../../components/TeacherNavs";
+import CourseForTeacher from "../../components/CourseForTeacher";
+import Footer from "../../components/Footer";
 
 function TeacherCourses() {
   const [coursename, setCourseName] = useState("");

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { register } from "../actions/teacherActions";
-//import Spinner from '../components/Spinner';
-import Alert from "../components/Alert";
-import Footer from "../components/Footer";
+import { NavLink, useNavigate } from "react-router-dom";
+import { register } from "../../actions/studentActions";
+import Alert from "../../components/Alert";
+import Footer from "../../components/Footer";
 
-function TeacherRegister() {
+function StudentRegister() {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -14,27 +13,28 @@ function TeacherRegister() {
   const [phone, setPhone] = useState("");
   const [avatar, setAvatar] = useState("");
   const [address, setAddress] = useState("");
+  const [course, setCourse] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
 
-  const { loading, error, teacherInfo } = useSelector(
-    (state) => state.teacherRegister
+  const { loading, error, studentInfo } = useSelector(
+    (state) => state.studentRegister
   );
 
   useEffect(() => {
-    if (teacherInfo) {
-      navigate("/teacher_dashboard");
+    if (studentInfo) {
+      navigate("/student_dashboard");
     }
-  }, [teacherInfo]);
+  }, [studentInfo, navigate]);
 
   const submitHandler = (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords do not match");
     } else {
-      dispatch(register(name, email, password, phone, address, avatar));
+      dispatch(register(name, email, password, phone, address, avatar, course));
     }
   };
 
@@ -46,7 +46,7 @@ function TeacherRegister() {
             <div className="banner-content col-lg-8 col-12 m-lg-auto text-center">
               {error && <Alert type="danger">{error}</Alert>}
               <h1 className="banner-heading display-3 pb-5 semi-bold-600 typo-space-line-center">
-                Teacher Registration
+                Student Registration
               </h1>
               <div className="col-10 col-md-10 mx-auto my-5 text-dark">
                 <form className="contact_form row" onSubmit={submitHandler}>
@@ -59,12 +59,10 @@ function TeacherRegister() {
                         name="name"
                         placeholder="Your Name*"
                         value={name}
-                        onChange={(event) => {
-                          setName(event.target.value);
-                        }}
+                        onChange={(e) => setName(e.target.value)}
                         required
                       />
-                      <label for="name light-300">Your Name*</label>
+                      <label htmlFor="name light-300">Your Name*</label>
                     </div>
                   </div>
                   <div className="col-lg-6 mb-4">
@@ -76,29 +74,25 @@ function TeacherRegister() {
                         name="email"
                         placeholder="Your Email*"
                         value={email}
-                        onChange={(event) => {
-                          setEmail(event.target.value);
-                        }}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                       />
-                      <label for="email light-300">Your Email*</label>
+                      <label htmlFor="email light-300">Your Email*</label>
                     </div>
                   </div>
                   <div className="col-lg-6 mb-4">
                     <div className="form-floating">
                       <input
-                        type="number"
+                        type="text"
                         className="form-control form-control-lg light-300"
                         id="phone"
                         name="phone"
                         placeholder="Your Phone*"
                         value={phone}
-                        onChange={(event) => {
-                          setPhone(event.target.value);
-                        }}
+                        onChange={(e) => setPhone(e.target.value)}
                         required
                       />
-                      <label for="phone light-300">Your Phone*</label>
+                      <label htmlFor="phone light-300">Your Phone*</label>
                     </div>
                   </div>
                   <div className="col-lg-6 mb-4">
@@ -109,12 +103,9 @@ function TeacherRegister() {
                         id="avatar"
                         name="avatar"
                         placeholder="Your avatar"
-                        value={avatar}
-                        onChange={(event) => {
-                          setAvatar(event.target.value);
-                        }}
+                        onChange={(e) => setAvatar(e.target.files[0])}
                       />
-                      <label for="address light-300">Avatar</label>
+                      <label htmlFor="address light-300">Avatar</label>
                     </div>
                   </div>
                   <div className="col-12">
@@ -126,12 +117,29 @@ function TeacherRegister() {
                         name="address"
                         placeholder="address*"
                         value={address}
-                        onChange={(event) => {
-                          setAddress(event.target.value);
-                        }}
+                        onChange={(e) => setAddress(e.target.value)}
                         required
                       />
-                      <label for="subject light-300">Your Address*</label>
+                      <label htmlFor="subject light-300">Your Address*</label>
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <div className="form-floating mb-4">
+                      <select
+                        className="form-select form-control form-control-lg light-300"
+                        id="coursename"
+                        name="coursename"
+                        aria-label="Default select"
+                        value={course}
+                        onChange={(e) => setCourse(e.target.value)}
+                        required
+                      >
+                        <option value="">Select Course*</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                      <label htmlFor="subject light-300">Select Course*</label>
                     </div>
                   </div>
                   <div className="col-lg-6 mb-4">
@@ -143,12 +151,10 @@ function TeacherRegister() {
                         name="password1"
                         placeholder="Your Password*"
                         value={password}
-                        onChange={(event) => {
-                          setPassword(event.target.value);
-                        }}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                       />
-                      <label for="password1 light-300">Password*</label>
+                      <label htmlFor="password1 light-300">Password*</label>
                     </div>
                   </div>
                   <div className="col-lg-6 mb-4">
@@ -160,12 +166,12 @@ function TeacherRegister() {
                         name="password2"
                         placeholder="Confirm Password*"
                         value={confirmPassword}
-                        onChange={(event) => {
-                          setConfirmPassword(event.target.value);
-                        }}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                       />
-                      <label for="password2 light-300">Confirm Password*</label>
+                      <label htmlFor="password2 light-300">
+                        Confirm Password*
+                      </label>
                     </div>
                   </div>
                   <div className="col-md-12 col-12 mx-auto my-3">
@@ -179,20 +185,20 @@ function TeacherRegister() {
                 </form>
               </div>
               <div className="col-10 col-md-8 mx-auto my-5 d-flex justify-content-around">
-                <NavLink to="/teacher_login" exact>
+                <NavLink to="/student_login" exact>
                   <button
                     type="button"
                     className="btn rounded-pill btn-light px-4"
                   >
-                    Teacher Login
+                    Student Login
                   </button>
                 </NavLink>
-                <NavLink to="/student_login" exact>
+                <NavLink to="/teacher_login" exact>
                   <button
                     type="button"
                     className="btn rounded-pill btn-outline-info px-4"
                   >
-                    Student Login
+                    Teacher Login
                   </button>
                 </NavLink>
               </div>
@@ -205,4 +211,4 @@ function TeacherRegister() {
   );
 }
 
-export default TeacherRegister;
+export default StudentRegister;
