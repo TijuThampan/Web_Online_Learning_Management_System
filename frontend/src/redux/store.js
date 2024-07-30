@@ -11,6 +11,13 @@ import {
   specificCourseListReducer,
 } from "./reducers/courseReducers";
 import {
+  examCreateReducer,
+  examDeleteReducer,
+  examDetailsReducer,
+  examListReducer,
+  examUpdateReducer,
+} from "./reducers/examReducers";
+import {
   studentLoginReducer,
   studentRegisterReducer,
 } from "./reducers/studentReducers";
@@ -30,6 +37,11 @@ const reducer = combineReducers({
   studentLogin: studentLoginReducer,
   studentRegister: studentRegisterReducer,
   courseEnroll: courseEnrollReducer,
+  examCreate: examCreateReducer,
+  examList: examListReducer,
+  examUpdate: examUpdateReducer,
+  examDelete: examDeleteReducer,
+  examDetails: examDetailsReducer,
 });
 
 const teacherInfoFromStorage = localStorage.getItem("teacherInfo")

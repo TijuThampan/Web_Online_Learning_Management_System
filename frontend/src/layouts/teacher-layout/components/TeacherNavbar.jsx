@@ -60,11 +60,6 @@ export function TeacherNavbar() {
                   Tests
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/teacher/add-question" exact>
-                  Add Question
-                </NavLink>
-              </li>
             </ul>
             <div className="navbar align-self-center d-flex">
               {teacherInfo && (
