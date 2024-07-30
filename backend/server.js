@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import connectDB from "./config/db.js";
+import attemptRoutes from "./routes/attemptRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
 import examRoutes from "./routes/examRoutes.js";
 import questionRoutes from "./routes/questionRoutes.js";
@@ -24,6 +25,7 @@ app.use("/api/course", courseRoutes);
 app.use("/api/student", studentRoutes);
 app.use("/api/exam", examRoutes);
 app.use("/api/question", questionRoutes);
+app.use("/api/attempt", attemptRoutes);
 
 const port = 8000 || process.env.PORT;
 

@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Exam from "../models/examModel.js";
 import Question from "../models/questionModel.js";
+import Student from "../models/studentModel.js";
 
 // @desc    Create an exam
 // @route   POST /api/exam/create
@@ -101,5 +102,82 @@ export const getExamById = asyncHandler(async (req, res) => {
   } else {
     res.status(404);
     throw new Error("Exam not found");
+  }
+});
+
+// @desc    Get exams for enrolled courses
+// @route   GET /api/exam/enrolled
+// @access  Private (Student)
+export const getEnrolledExams = asyncHandler(async (req, res) => {
+  const studentId = req.user._id;
+
+  console.log("studentId", studentId);
+
+  // Find the student and get their enrolled courses
+  const student = await Student.findById(studentId);
+  if (!student) {
+    res.status(404);
+    throw new Error("Student not found");
+  }
+
+  const enrolledCourseIds = student.course;
+  console.log("enrolledCourseIds", enrolledCourseIds);
+
+  // Get all exams for these courses
+  const exams = await Exam.find({
+    course: { $in: enrolledCourseIds },
+  }).populate("course", "course_name");
+
+  if (exams.length > 0) {
+    // Get question count for each exam
+    const examsWithQuestionCount = await Promise.all(
+      exams.map(async (exam) => {
+        const questionCount = await Question.countDocuments({ exam: exam._id });
+        return {
+          ...exam.toObject(),
+          no_of_questions: questionCount,
+        };
+      })
+    );
+
+    res.json(examsWithQuestionCount);
+  } else {
+    res.json([]);
+  }
+});
+
+// @desc    Get a single exam for enrolled student
+// @route   GET /api/exam/enrolled/:id
+// @access  Private (Student)
+export const getEnrolledExamById = asyncHandler(async (req, res) => {
+  const studentId = req.user._id;
+  const examId = req.params.id;
+
+  const exam = await Exam.findById(examId).populate(
+    "course",
+    "course_name students"
+  );
+
+  if (!exam) {
+    res.status(404);
+    throw new Error("Exam not found");
+  }
+
+  // Check if the student is enrolled in the course
+  if (!exam.course.students.includes(studentId)) {
+    res.status(403);
+    throw new Error("Not authorized to access this exam");
+  }
+
+  if (exam.active) {
+    const questionCount = await Question.countDocuments({ exam: exam._id });
+    const examWithQuestionCount = {
+      ...exam.toObject(),
+      no_of_questions: questionCount,
+    };
+    res.json(examWithQuestionCount);
+  } else {
+    res.status(403);
+    throw new Error("This exam is not active");
   }
 });
