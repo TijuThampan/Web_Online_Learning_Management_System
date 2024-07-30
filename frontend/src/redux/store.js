@@ -3,6 +3,8 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { thunk } from "redux-thunk";
 
 import {
+  attemptDeleteReducer,
+  attemptGetAllReducer,
   attemptQuestionsReducer,
   attemptStartReducer,
   attemptSubmitReducer,
@@ -68,6 +70,8 @@ const reducer = combineReducers({
   attemptStart: attemptStartReducer,
   attemptQuestions: attemptQuestionsReducer,
   attemptSubmit: attemptSubmitReducer,
+  attemptGetAll: attemptGetAllReducer,
+  attemptDelete: attemptDeleteReducer,
 });
 
 const teacherInfoFromStorage = localStorage.getItem("teacherInfo")

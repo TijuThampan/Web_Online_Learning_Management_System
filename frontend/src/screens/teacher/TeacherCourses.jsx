@@ -51,7 +51,7 @@ function TeacherCourses() {
           className="btn btn-primary"
           onClick={() => setIsModalOpen(true)}
         >
-          Create New Course
+          Create Course
         </button>
       </div>
 
@@ -63,7 +63,7 @@ function TeacherCourses() {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Create New Course</h5>
+                <h5 className="modal-title">Create Course</h5>
                 <button
                   type="button"
                   className="btn-close"

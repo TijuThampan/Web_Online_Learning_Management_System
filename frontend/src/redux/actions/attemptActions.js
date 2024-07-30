@@ -1,4 +1,10 @@
 import {
+  ATTEMPT_DELETE_FAIL,
+  ATTEMPT_DELETE_REQUEST,
+  ATTEMPT_DELETE_SUCCESS,
+  ATTEMPT_GET_ALL_FAIL,
+  ATTEMPT_GET_ALL_REQUEST,
+  ATTEMPT_GET_ALL_SUCCESS,
   ATTEMPT_QUESTIONS_FAIL,
   ATTEMPT_QUESTIONS_REQUEST,
   ATTEMPT_QUESTIONS_SUCCESS,
@@ -123,3 +129,68 @@ export const submitAttempt =
       });
     }
   };
+
+export const getAllAttempts = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ATTEMPT_GET_ALL_REQUEST,
+    });
+
+    const {
+      teacherLogin: { teacherInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${teacherInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/attempt/all-attempts`, config);
+
+    dispatch({
+      type: ATTEMPT_GET_ALL_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ATTEMPT_GET_ALL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteAttempt = (attemptId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ATTEMPT_DELETE_REQUEST,
+    });
+
+    const {
+      teacherLogin: { teacherInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${teacherInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/attempt/${attemptId}`, config);
+
+    dispatch({
+      type: ATTEMPT_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: ATTEMPT_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

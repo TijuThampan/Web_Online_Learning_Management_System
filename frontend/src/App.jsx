@@ -25,6 +25,7 @@ import TeacherCourses from "./screens/teacher/TeacherCourses";
 import TeacherDash from "./screens/teacher/TeacherDash";
 import TeacherLogin from "./screens/teacher/TeacherLogin";
 import TeacherRegister from "./screens/teacher/TeacherRegister";
+import TeacherResults from "./screens/teacher/TeacherResults";
 import TeacherTests from "./screens/teacher/TeacherTests";
 import TeacherTestsQuestions from "./screens/teacher/TeacherTestsQuestions";
 import Tests from "./screens/Tests";
@@ -55,6 +56,7 @@ export function App() {
               path="tests-questions/:examId"
               element={<TeacherTestsQuestions />}
             />
+            <Route path="results" element={<TeacherResults />} />
           </Route>
           <Route path="/student" element={<StudentLayout />}>
             <Route path="dashboard" element={<StudentDash />} />
