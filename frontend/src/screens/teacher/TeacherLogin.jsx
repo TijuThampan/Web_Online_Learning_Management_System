@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../actions/teacherActions";
+import { login } from "../../redux/actions/teacherActions";
 import { NavLink, useNavigate } from "react-router-dom";
 //import Spinner from '../components/Spinner';
 import Alert from "../../components/Alert";

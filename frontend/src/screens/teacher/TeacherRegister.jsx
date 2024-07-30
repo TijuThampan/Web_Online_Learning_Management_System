@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { register } from "../../actions/teacherActions";
+import { NavLink, useNavigate } from "react-router-dom";
+import { register } from "../../redux/actions/teacherActions";
 //import Spinner from '../components/Spinner';
 import Alert from "../../components/Alert";
 import Footer from "../../components/Footer";

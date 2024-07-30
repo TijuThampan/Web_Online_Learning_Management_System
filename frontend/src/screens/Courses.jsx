@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listCourses } from "../actions/courseActions";
+import { listCourses } from "../redux/actions/courseActions";
 import CourseBox from "../components/CourseBox";
 import Footer from "../components/Footer";
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listCourses } from "../../actions/courseActions";
+import { listCourses } from "../../redux/actions/courseActions";
 import Alert from "../../components/Alert";
 import Spinner from "../../components/Spinner";
 

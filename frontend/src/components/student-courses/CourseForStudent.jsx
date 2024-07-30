@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { enrollCourse } from "../../actions/courseActions";
+import { enrollCourse } from "../../redux/actions/courseActions";
 
 function CourseForStudent({ courses }) {
   const dispatch = useDispatch();

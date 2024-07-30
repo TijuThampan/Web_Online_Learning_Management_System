@@ -1,14 +1,13 @@
 import React from "react";
-import TeacherTabs from "../../components/TeacherTabs";
-import QsnForTeacher from "../../components/QsnForTeacher";
+
 import Footer from "../../components/Footer";
+import QsnForTeacher from "../../components/QsnForTeacher";
 
 function AddQuestion() {
   return (
     <div>
       <section>
         <div id="page_banner2" className="banner-wrapper bg-light w-100 py-5">
-          <TeacherTabs />
           <div className="container text-light d-flex justify-content-center align-items-center py-5 p-0">
             <div className="banner-content col-lg-8 col-12 m-lg-auto text-center">
               <h1 className="banner-heading display-3 pb-5 semi-bold-600 typo-space-line-center">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { register } from "../../actions/studentActions";
+import { register } from "../../redux/actions/studentActions";
 import Alert from "../../components/Alert";
 import Footer from "../../components/Footer";
 

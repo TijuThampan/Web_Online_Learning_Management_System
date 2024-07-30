@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createCourse, getSpecificCourses } from "../../actions/courseActions";
 import Alert from "../../components/Alert";
 import Spinner from "../../components/Spinner";
-import TeacherNavs from "../../components/TeacherNavs";
+import {
+  createCourse,
+  getSpecificCourses,
+} from "../../redux/actions/courseActions";
+
 import CourseForTeacher from "../../components/CourseForTeacher";
 import Footer from "../../components/Footer";
 
@@ -45,7 +48,6 @@ function TeacherCourses() {
     <div>
       <section>
         <div id="page_banner2" className="banner-wrapper bg-light w-100 py-5">
-          <TeacherNavs />
           <div className="container text-light d-flex justify-content-center align-items-center py-5 p-0">
             <div className="banner-content col-lg-8 col-12 m-lg-auto text-center">
               {error && <Alert type="danger">{error}</Alert>}

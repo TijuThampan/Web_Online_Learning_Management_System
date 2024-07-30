@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout as teacherLogout } from "../actions/teacherActions";
-import { logout as studentLogout } from "../actions/studentActions";
+import { logout as teacherLogout } from "../redux/actions/teacherActions";
+import { logout as studentLogout } from "../redux/actions/studentActions";
 import { NavLink } from "react-router-dom";
 
 function Navbar() {

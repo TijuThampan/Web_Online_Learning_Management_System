@@ -1,13 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateCourse, deleteCourse } from "../actions/courseActions";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateCourse, deleteCourse } from "../redux/actions/courseActions";
 import { NavLink } from "react-router-dom";
+import Modal from "react-modal";
 
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: "1000",
+  },
+};
 function CourseForTeacher({ spcfcourses }) {
   const [courseName, setCourseName] = useState("");
   const [courseOutline, setCourseOutline] = useState("");
   const [courseUnits, setCourseUnits] = useState("");
   const [courseId, setCourseId] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -18,10 +31,23 @@ function CourseForTeacher({ spcfcourses }) {
     setCourseOutline("");
     setCourseUnits("");
     setCourseId("");
+    setIsModalOpen(false);
   };
 
   const handleDelete = (id) => {
     dispatch(deleteCourse(id));
+  };
+
+  const openModal = (spcfcourse) => {
+    setCourseName(spcfcourse.course_name);
+    setCourseOutline(spcfcourse.course_outline);
+    setCourseUnits(spcfcourse.total_units);
+    setCourseId(spcfcourse._id);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -59,14 +85,7 @@ function CourseForTeacher({ spcfcourses }) {
                 <button
                   type="button"
                   className="btn rounded-pill px-4 btn-outline-primary mb-3"
-                  data-bs-toggle="modal"
-                  data-bs-target="#updateModal"
-                  onClick={() => {
-                    setCourseName(spcfcourse.course_name);
-                    setCourseOutline(spcfcourse.course_outline);
-                    setCourseUnits(spcfcourse.total_units);
-                    setCourseId(spcfcourse._id);
-                  }}
+                  onClick={() => openModal(spcfcourse)}
                 >
                   Update
                 </button>
@@ -87,86 +106,86 @@ function CourseForTeacher({ spcfcourses }) {
         </div>
       ))}
 
-      <div
-        className="modal fade"
-        id="updateModal"
-        tabindex="-1"
-        aria-labelledby="ModalLabel"
-        aria-hidden="true"
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Update Course Modal"
+        style={customStyles}
       >
-        <div className="modal-dialog modal-dialog-centered">
-          <form className="row mx-auto w-100" onSubmit={submitHandler}>
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Update Course - {courseName}
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body">
-                <div className="mb-4">
-                  <div className="form-floating">
-                    <input
-                      type="text"
-                      className="form-control form-control-lg light-300"
-                      placeholder="Course name*"
-                      value={courseName}
-                      onChange={(event) => {
-                        setCourseName(event.target.value);
-                      }}
-                      required
-                    />
-                    <label for="coursename light-300">Course Name*</label>
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <div className="form-floating">
-                    <input
-                      type="number"
-                      className="form-control form-control-lg light-300"
-                      placeholder="No. of Units*"
-                      value={courseUnits}
-                      onChange={(event) => {
-                        setCourseUnits(event.target.value);
-                      }}
-                      required
-                    />
-                    <label for="units light-300">Units*</label>
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <div className="form-floating mb-4">
-                    <input
-                      type="text"
-                      className="form-control form-control-lg light-300"
-                      placeholder="Course Outline*"
-                      value={courseOutline}
-                      onChange={(event) => {
-                        setCourseOutline(event.target.value);
-                      }}
-                      required
-                    />
-                    <label for="outline light-300">Outline*</label>
-                  </div>
+        <form className="row mx-auto w-100" onSubmit={submitHandler}>
+          <div className="modal-content">
+            <div
+              className="modal-header"
+              style={{ justifyContent: "space-between", paddingBottom: 12 }}
+            >
+              <h5 className="modal-title" id="exampleModalLabel">
+                Update Course - {courseName}
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={closeModal}
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div className="mb-4">
+                <div className="form-floating">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg light-300"
+                    placeholder="Course name*"
+                    value={courseName}
+                    onChange={(event) => {
+                      setCourseName(event.target.value);
+                    }}
+                    required
+                  />
+                  <label htmlFor="coursename light-300">Course Name*</label>
                 </div>
               </div>
-              <div className="modal-footer">
-                <button
-                  type="submit"
-                  className="btn btn-info btn-lg rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300"
-                >
-                  Save Changes
-                </button>
+              <div className="mb-4">
+                <div className="form-floating">
+                  <input
+                    type="number"
+                    className="form-control form-control-lg light-300"
+                    placeholder="No. of Units*"
+                    value={courseUnits}
+                    onChange={(event) => {
+                      setCourseUnits(event.target.value);
+                    }}
+                    required
+                  />
+                  <label htmlFor="units light-300">Units*</label>
+                </div>
+              </div>
+              <div className="mb-4">
+                <div className="form-floating mb-4">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg light-300"
+                    placeholder="Course Outline*"
+                    value={courseOutline}
+                    onChange={(event) => {
+                      setCourseOutline(event.target.value);
+                    }}
+                    required
+                  />
+                  <label htmlFor="outline light-300">Outline*</label>
+                </div>
               </div>
             </div>
-          </form>
-        </div>
-      </div>
+            <div className="modal-footer">
+              <button
+                type="submit"
+                className="btn btn-info btn-lg rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300"
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }
