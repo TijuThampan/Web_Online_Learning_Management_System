@@ -29,21 +29,11 @@ const studentSchema = mongoose.Schema(
     },
     course: {
       type: Array,
-      required: true,
+      required: false,
     },
     exam: {
       type: Array,
-      required: true,
-    },
-    active: {
-      type: Boolean,
-      required: true,
-      default: 1,
-    },
-    cKey: {
-      type: Boolean,
-      required: true,
-      default: 1,
+      required: false,
     },
   },
   {

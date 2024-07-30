@@ -57,17 +57,7 @@ export const logout = () => (dispatch) => {
 };
 
 export const register =
-  (
-    stud_name,
-    stud_email,
-    password,
-    stud_mobile,
-    stud_address,
-    stud_pic,
-    course,
-    exam
-  ) =>
-  async (dispatch) => {
+  (name, email, password, phone, address) => async (dispatch) => {
     try {
       dispatch({
         type: STUDENT_REGISTER_REQUEST,
@@ -82,14 +72,11 @@ export const register =
       const { data } = await axios.post(
         "/api/student/register",
         {
-          stud_name,
-          stud_email,
+          stud_name: name,
+          stud_email: email,
           password,
-          stud_mobile,
-          stud_address,
-          stud_pic,
-          course,
-          exam,
+          stud_mobile: phone,
+          stud_address: address,
         },
         config
       );

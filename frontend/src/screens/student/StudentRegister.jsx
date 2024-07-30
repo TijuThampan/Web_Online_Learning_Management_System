@@ -10,9 +10,7 @@ function StudentRegister() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [avatar, setAvatar] = useState("");
   const [address, setAddress] = useState("");
-  const [course, setCourse] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -33,7 +31,7 @@ function StudentRegister() {
     if (password !== confirmPassword) {
       alert("Passwords do not match");
     } else {
-      dispatch(register(name, email, password, phone, address, avatar, course));
+      dispatch(register(name, email, password, phone, address));
     }
   };
 
@@ -49,7 +47,7 @@ function StudentRegister() {
               </h1>
               <div className="col-10 col-md-10 mx-auto my-5 text-dark">
                 <form className="contact_form row" onSubmit={submitHandler}>
-                  <div className="col-lg-6 mb-4">
+                  <div className="col-12 mb-4">
                     <div className="form-floating">
                       <input
                         type="text"
@@ -82,7 +80,7 @@ function StudentRegister() {
                   <div className="col-lg-6 mb-4">
                     <div className="form-floating">
                       <input
-                        type="text"
+                        type="phone"
                         className="form-control form-control-lg light-300"
                         id="phone"
                         name="phone"
@@ -94,22 +92,9 @@ function StudentRegister() {
                       <label htmlFor="phone light-300">Your Phone*</label>
                     </div>
                   </div>
-                  <div className="col-lg-6 mb-4">
-                    <div className="form-floating">
-                      <input
-                        type="file"
-                        className="form-control form-control-lg light-300"
-                        id="avatar"
-                        name="avatar"
-                        placeholder="Your avatar"
-                        onChange={(e) => setAvatar(e.target.files[0])}
-                      />
-                      <label htmlFor="address light-300">Avatar</label>
-                    </div>
-                  </div>
                   <div className="col-12">
                     <div className="form-floating mb-4">
-                      <input
+                      <textarea
                         type="text"
                         className="form-control form-control-lg light-300"
                         id="address"
@@ -120,25 +105,6 @@ function StudentRegister() {
                         required
                       />
                       <label htmlFor="subject light-300">Your Address*</label>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="form-floating mb-4">
-                      <select
-                        className="form-select form-control form-control-lg light-300"
-                        id="coursename"
-                        name="coursename"
-                        aria-label="Default select"
-                        value={course}
-                        onChange={(e) => setCourse(e.target.value)}
-                        required
-                      >
-                        <option value="">Select Course*</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                      <label htmlFor="subject light-300">Select Course*</label>
                     </div>
                   </div>
                   <div className="col-lg-6 mb-4">

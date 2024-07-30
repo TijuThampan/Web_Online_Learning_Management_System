@@ -1,6 +1,6 @@
+import bcrypt from "bcryptjs";
 import asyncHandler from "express-async-handler";
 import Student from "../models/studentModel.js";
-import bcrypt from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
 
 //@desc Auth student & get token
@@ -19,11 +19,6 @@ const authStudent = asyncHandler(async (req, res) => {
         stud_email: student.stud_email,
         stud_mobile: student.stud_mobile,
         stud_address: student.stud_address,
-        stud_pic: student.stud_pic,
-        course: student.course,
-        exam: student.exam,
-        active: student.active,
-        cKey: student.cKey,
         token: generateToken(student._id),
       });
     } else {
