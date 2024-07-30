@@ -11,7 +11,6 @@ function TeacherRegister() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [avatar, setAvatar] = useState("");
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -33,7 +32,7 @@ function TeacherRegister() {
     if (password !== confirmPassword) {
       alert("Passwords do not match");
     } else {
-      dispatch(register(name, email, password, phone, address, avatar));
+      dispatch(register(name, email, password, phone, address));
     }
   };
 
@@ -49,7 +48,7 @@ function TeacherRegister() {
               </h1>
               <div className="col-10 col-md-10 mx-auto my-5 text-dark">
                 <form className="contact_form row" onSubmit={submitHandler}>
-                  <div className="col-lg-6 mb-4">
+                  <div className="col-12 mb-4">
                     <div className="form-floating">
                       <input
                         type="text"
@@ -98,22 +97,6 @@ function TeacherRegister() {
                         required
                       />
                       <label for="phone light-300">Your Phone*</label>
-                    </div>
-                  </div>
-                  <div className="col-lg-6 mb-4">
-                    <div className="form-floating">
-                      <input
-                        type="file"
-                        className="form-control form-control-lg light-300"
-                        id="avatar"
-                        name="avatar"
-                        placeholder="Your avatar"
-                        value={avatar}
-                        onChange={(event) => {
-                          setAvatar(event.target.value);
-                        }}
-                      />
-                      <label for="address light-300">Avatar</label>
                     </div>
                   </div>
                   <div className="col-12">
