@@ -8,6 +8,12 @@ import {
   EXAM_DETAILS_FAIL,
   EXAM_DETAILS_REQUEST,
   EXAM_DETAILS_SUCCESS,
+  EXAM_ENROLLED_DETAILS_FAIL,
+  EXAM_ENROLLED_DETAILS_REQUEST,
+  EXAM_ENROLLED_DETAILS_SUCCESS,
+  EXAM_ENROLLED_LIST_FAIL,
+  EXAM_ENROLLED_LIST_REQUEST,
+  EXAM_ENROLLED_LIST_SUCCESS,
   EXAM_LIST_FAIL,
   EXAM_LIST_REQUEST,
   EXAM_LIST_SUCCESS,
@@ -176,6 +182,72 @@ export const getExamDetails = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: EXAM_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listEnrolledExams = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: EXAM_ENROLLED_LIST_REQUEST,
+    });
+
+    const {
+      studentLogin: { studentInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${studentInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/exam/enrolled`, config);
+
+    dispatch({
+      type: EXAM_ENROLLED_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: EXAM_ENROLLED_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getEnrolledExamDetails = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: EXAM_ENROLLED_DETAILS_REQUEST,
+    });
+
+    const {
+      studentLogin: { studentInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${studentInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/exam/enrolled/${id}`, config);
+
+    dispatch({
+      type: EXAM_ENROLLED_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: EXAM_ENROLLED_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

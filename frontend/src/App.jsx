@@ -14,10 +14,12 @@ import Contact from "./screens/Contact";
 import Courses from "./screens/Courses";
 import Home from "./screens/Home";
 import Notices from "./screens/Notices";
+import StudentAttempt from "./screens/student/StudentAttempt";
 import StudentCourses from "./screens/student/StudentCourses";
 import StudentDash from "./screens/student/StudentDash";
 import StudentLogin from "./screens/student/StudentLogin";
 import StudentRegister from "./screens/student/StudentRegister";
+import StudentTests from "./screens/student/StudentTests";
 import TeacherCourses from "./screens/teacher/TeacherCourses";
 import TeacherDash from "./screens/teacher/TeacherDash";
 import TeacherLogin from "./screens/teacher/TeacherLogin";
@@ -56,6 +58,11 @@ export function App() {
           <Route path="/student" element={<StudentLayout />}>
             <Route path="dashboard" element={<StudentDash />} />
             <Route path="courses" element={<StudentCourses />} />
+            <Route path="tests" element={<StudentTests />} />
+            <Route
+              path="exam/:examId/attempt/:attemptId"
+              element={<StudentAttempt />}
+            />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

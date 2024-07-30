@@ -8,6 +8,12 @@ import {
   EXAM_DETAILS_FAIL,
   EXAM_DETAILS_REQUEST,
   EXAM_DETAILS_SUCCESS,
+  EXAM_ENROLLED_DETAILS_FAIL,
+  EXAM_ENROLLED_DETAILS_REQUEST,
+  EXAM_ENROLLED_DETAILS_SUCCESS,
+  EXAM_ENROLLED_LIST_FAIL,
+  EXAM_ENROLLED_LIST_REQUEST,
+  EXAM_ENROLLED_LIST_SUCCESS,
   EXAM_LIST_FAIL,
   EXAM_LIST_REQUEST,
   EXAM_LIST_SUCCESS,
@@ -75,6 +81,32 @@ export const examDetailsReducer = (state = { exam: {} }, action) => {
     case EXAM_DETAILS_SUCCESS:
       return { loading: false, exam: action.payload };
     case EXAM_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const examEnrolledListReducer = (state = { exams: [] }, action) => {
+  switch (action.type) {
+    case EXAM_ENROLLED_LIST_REQUEST:
+      return { loading: true, exams: [] };
+    case EXAM_ENROLLED_LIST_SUCCESS:
+      return { loading: false, exams: action.payload };
+    case EXAM_ENROLLED_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const examEnrolledDetailsReducer = (state = { exam: {} }, action) => {
+  switch (action.type) {
+    case EXAM_ENROLLED_DETAILS_REQUEST:
+      return { ...state, loading: true };
+    case EXAM_ENROLLED_DETAILS_SUCCESS:
+      return { loading: false, exam: action.payload };
+    case EXAM_ENROLLED_DETAILS_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

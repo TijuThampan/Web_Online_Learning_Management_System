@@ -3,6 +3,11 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { thunk } from "redux-thunk";
 
 import {
+  attemptQuestionsReducer,
+  attemptStartReducer,
+  attemptSubmitReducer,
+} from "./reducers/attemptReducers";
+import {
   courseCreateReducer,
   courseDeleteReducer,
   courseEnrollReducer,
@@ -14,6 +19,8 @@ import {
   examCreateReducer,
   examDeleteReducer,
   examDetailsReducer,
+  examEnrolledDetailsReducer,
+  examEnrolledListReducer,
   examListReducer,
   examUpdateReducer,
 } from "./reducers/examReducers";
@@ -49,11 +56,16 @@ const reducer = combineReducers({
   examUpdate: examUpdateReducer,
   examDelete: examDeleteReducer,
   examDetails: examDetailsReducer,
+  examEnrolledList: examEnrolledListReducer,
+  examEnrolledDetails: examEnrolledDetailsReducer,
   questionCreate: questionCreateReducer,
   questionList: questionListReducer,
   questionUpdate: questionUpdateReducer,
   questionDelete: questionDeleteReducer,
   questionDetails: questionDetailsReducer,
+  attemptStart: attemptStartReducer,
+  attemptQuestions: attemptQuestionsReducer,
+  attemptSubmit: attemptSubmitReducer,
 });
 
 const teacherInfoFromStorage = localStorage.getItem("teacherInfo")
