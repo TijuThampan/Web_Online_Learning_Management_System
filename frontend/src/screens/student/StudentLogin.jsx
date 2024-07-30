@@ -19,7 +19,7 @@ function StudentLogin() {
 
   useEffect(() => {
     if (studentInfo) {
-      navigate("/student_dashboard");
+      navigate("/student/dashboard");
     }
   }, [studentInfo, navigate]);
 
@@ -81,7 +81,7 @@ function StudentLogin() {
                 </form>
               </div>
               <div className="col-10 col-md-8 mx-auto my-5 d-flex justify-content-around">
-                <NavLink to="/teacher_login" exact>
+                <NavLink to="/teacher/login" exact>
                   <button
                     type="button"
                     className="btn rounded-pill btn-light px-4"
@@ -89,7 +89,7 @@ function StudentLogin() {
                     Teacher Login
                   </button>
                 </NavLink>
-                <NavLink to="/student_register" exact>
+                <NavLink to="/student/register" exact>
                   <button
                     type="button"
                     className="btn rounded-pill btn-outline-info px-4"

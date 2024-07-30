@@ -27,7 +27,7 @@ function TeacherDash({ history }) {
               <div className="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 m-0">
                 <div className="col-xl-3 col-md-4 col-sm-6">
                   <NavLink
-                    to="/teacher_courses"
+                    to="/teacher/courses"
                     exact
                     className="course card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0"
                   >
@@ -48,7 +48,7 @@ function TeacherDash({ history }) {
 
                 <div className="col-xl-3 col-md-4 col-sm-6">
                   <NavLink
-                    to="/teacher_tests"
+                    to="/teacher/tests"
                     exact
                     className="course card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0"
                   >

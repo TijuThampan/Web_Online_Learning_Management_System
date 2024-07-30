@@ -22,6 +22,7 @@ import StudentLogin from "./screens/student/StudentLogin";
 import StudentRegister from "./screens/student/StudentRegister";
 import StudentDash from "./screens/student/StudentDash";
 import "./App.css";
+import StudentCourses from "./screens/student/StudentCourses";
 
 function App() {
   return (
@@ -35,15 +36,20 @@ function App() {
           <Route path="/tests" element={<Tests />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/notices" element={<Notices />} />
-          <Route path="/teacher_login" element={<TeacherLogin />} />
-          <Route path="/teacher_register" element={<TeacherRegister />} />
-          <Route path="/teacher_dashboard" element={<TeacherDash />} />
-          <Route path="/teacher_courses" element={<TeacherCourses />} />
-          <Route path="/teacher_tests" element={<TeacherTests />} />
-          <Route path="/add_question" element={<AddQuestion />} />
-          <Route path="/student_login" element={<StudentLogin />} />
-          <Route path="/student_register" element={<StudentRegister />} />
-          <Route path="/student_dashboard" element={<StudentDash />} />
+          <Route path="/teacher">
+            <Route path="login" element={<TeacherLogin />} />
+            <Route path="register" element={<TeacherRegister />} />
+            <Route path="dashboard" element={<TeacherDash />} />
+            <Route path="courses" element={<TeacherCourses />} />
+            <Route path="tests" element={<TeacherTests />} />
+            <Route path="add-question" element={<AddQuestion />} />
+          </Route>
+          <Route path="/student">
+            <Route path="login" element={<StudentLogin />} />
+            <Route path="register" element={<StudentRegister />} />
+            <Route path="dashboard" element={<StudentDash />} />
+            <Route path="courses" element={<StudentCourses />} />
+          </Route>
           {/* Add other routes as needed */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

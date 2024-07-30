@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { listCourses } from "../../actions/courseActions";
 import Alert from "../../components/Alert";
 import Spinner from "../../components/Spinner";
-import StudentNavs from "../../components/StudentNavs";
-import CourseForStudent from "../../components/CourseForStudent";
+
 import Footer from "../../components/Footer";
+import CourseForStudent from "../../components/student-courses/CourseForStudent";
 
 function StudentCourses() {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function StudentCourses() {
     <div>
       <section>
         <div id="page_banner2" className="banner-wrapper bg-light w-100 py-5">
-          <StudentNavs />
+          {/* <StudentNavs /> */}
           <div className="container text-light d-flex justify-content-center align-items-center py-5 p-0">
             <div className="banner-content col-lg-8 col-12 m-lg-auto text-center">
               {error && <Alert type="danger">{error}</Alert>}

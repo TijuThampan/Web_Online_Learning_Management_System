@@ -25,7 +25,7 @@ function StudentRegister() {
 
   useEffect(() => {
     if (studentInfo) {
-      navigate("/student_dashboard");
+      navigate("/student/dashboard");
     }
   }, [studentInfo, navigate]);
 
@@ -185,7 +185,7 @@ function StudentRegister() {
                 </form>
               </div>
               <div className="col-10 col-md-8 mx-auto my-5 d-flex justify-content-around">
-                <NavLink to="/student_login" exact>
+                <NavLink to="/student/login" exact>
                   <button
                     type="button"
                     className="btn rounded-pill btn-light px-4"
@@ -193,7 +193,7 @@ function StudentRegister() {
                     Student Login
                   </button>
                 </NavLink>
-                <NavLink to="/teacher_login" exact>
+                <NavLink to="/teacher/login" exact>
                   <button
                     type="button"
                     className="btn rounded-pill btn-outline-info px-4"
