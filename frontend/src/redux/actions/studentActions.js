@@ -1,11 +1,11 @@
 import {
+  STUDENT_LOGIN_FAIL,
   STUDENT_LOGIN_REQUEST,
   STUDENT_LOGIN_SUCCESS,
-  STUDENT_LOGIN_FAIL,
   STUDENT_LOGOUT,
+  STUDENT_REGISTER_FAIL,
   STUDENT_REGISTER_REQUEST,
   STUDENT_REGISTER_SUCCESS,
-  STUDENT_REGISTER_FAIL,
 } from "../constants/studentConstants";
 
 import axios from "axios";
@@ -50,6 +50,7 @@ export const login = (stud_email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem("studentInfo");
+
   dispatch({
     type: STUDENT_LOGOUT,
   });
