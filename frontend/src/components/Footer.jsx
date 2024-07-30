@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { NavLink } from "react-router-dom";
 
 function Footer() {
@@ -9,7 +9,7 @@ function Footer() {
           <div className="row py-4">
             <div className="col-lg-3 col-12 align-left">
               <NavLink className="navbar-brand" to="/" exact>
-                <i className='bi-building text-success'></i>
+                <i className="bi-building text-success"></i>
                 <span className="text-white">L</span>
                 <span className="text-primary">E</span>
                 <span className="text-white">M</span>
@@ -18,32 +18,58 @@ function Footer() {
                 <span className="text-white">S</span>
               </NavLink>
               <p className="text-light my-lg-4 my-2">
-                It's a Learning management System with online examination facility to help teachers and students.
+                It's a Learning management System with online examination
+                facility to help teachers and students.
               </p>
               <ul className="list-inline footer-icons light-300">
                 <li className="list-inline-item mx-2">
-                  <a className="text-light" rel="noreferrer" target="_blank" href="http://facebook.com/">
-                    <i className='bi-facebook'></i>
+                  <a
+                    className="text-light"
+                    rel="noreferrer"
+                    target="_blank"
+                    href="http://facebook.com/"
+                  >
+                    <i className="bi-facebook"></i>
                   </a>
                 </li>
                 <li className="list-inline-item mx-2">
-                  <a className="text-light" rel="noreferrer" target="_blank" href="https://www.linkedin.com/">
-                    <i className='bi-linkedin'></i>
+                  <a
+                    className="text-light"
+                    rel="noreferrer"
+                    target="_blank"
+                    href="https://www.linkedin.com/"
+                  >
+                    <i className="bi-linkedin"></i>
                   </a>
                 </li>
                 <li className="list-inline-item mx-2">
-                  <a className="text-light" rel="noreferrer" target="_blank" href="https://www.github.com/">
-                    <i className='bi-github'></i>
+                  <a
+                    className="text-light"
+                    rel="noreferrer"
+                    target="_blank"
+                    href="https://www.github.com/"
+                  >
+                    <i className="bi-github"></i>
                   </a>
                 </li>
                 <li className="list-inline-item mx-2">
-                  <a className="text-light" rel="noreferrer" target="_blank" href="https://www.twitter.com/">
-                    <i className='bi-twitter'></i>
+                  <a
+                    className="text-light"
+                    rel="noreferrer"
+                    target="_blank"
+                    href="https://www.twitter.com/"
+                  >
+                    <i className="bi-twitter"></i>
                   </a>
                 </li>
                 <li className="list-inline-item mx-2">
-                  <a className="text-light" rel="noreferrer" target="_blank" href="https://www.instagram.com/">
-                    <i className='bi-instagram'></i>
+                  <a
+                    className="text-light"
+                    rel="noreferrer"
+                    target="_blank"
+                    href="https://www.instagram.com/"
+                  >
+                    <i className="bi-instagram"></i>
                   </a>
                 </li>
               </ul>
@@ -52,20 +78,44 @@ function Footer() {
               <h3 className="pb-lg-3 text-light light-300">Quick Links</h3>
               <ul className="list-unstyled text-light light-300">
                 <li className="pb-2">
-                  <i className='bi-chevron-right'></i>
-                  <NavLink className="text-decoration-none text-light" to="/courses" exact>Courses</NavLink>
+                  <i className="bi-chevron-right"></i>
+                  <NavLink
+                    className="text-decoration-none text-light"
+                    to="/courses"
+                    exact
+                  >
+                    Courses
+                  </NavLink>
                 </li>
                 <li className="pb-2">
-                  <i className='bi-chevron-right'></i>
-                  <NavLink className="text-decoration-none text-light" to="/tests" exact>Tests</NavLink>
+                  <i className="bi-chevron-right"></i>
+                  <NavLink
+                    className="text-decoration-none text-light"
+                    to="/tests"
+                    exact
+                  >
+                    Tests
+                  </NavLink>
                 </li>
                 <li className="pb-2">
-                  <i className='bi-chevron-right'></i>
-                  <NavLink className="text-decoration-none text-light" to="/teacher_login" exact>Teacher</NavLink>
+                  <i className="bi-chevron-right"></i>
+                  <NavLink
+                    className="text-decoration-none text-light"
+                    to="/teacher/login"
+                    exact
+                  >
+                    Teacher
+                  </NavLink>
                 </li>
                 <li className="pb-2">
-                  <i className='bi-chevron-right'></i>
-                  <NavLink className="text-decoration-none text-light" to="/student_login" exact>Student</NavLink>
+                  <i className="bi-chevron-right"></i>
+                  <NavLink
+                    className="text-decoration-none text-light"
+                    to="/student/login"
+                    exact
+                  >
+                    Student
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -74,20 +124,44 @@ function Footer() {
               <h3 className="pb-lg-3 text-light light-300">Latest Courses</h3>
               <ul className="list-unstyled text-light light-300">
                 <li className="pb-2">
-                  <i className='bi-chevron-right'></i>
-                  <NavLink className="text-decoration-none text-light" to="/" exact>Office Automation</NavLink>
+                  <i className="bi-chevron-right"></i>
+                  <NavLink
+                    className="text-decoration-none text-light"
+                    to="/"
+                    exact
+                  >
+                    Office Automation
+                  </NavLink>
                 </li>
                 <li className="pb-2">
-                  <i className='bi-chevron-right'></i>
-                  <NavLink className="text-decoration-none text-light" to="/" exact>Web Development</NavLink>
+                  <i className="bi-chevron-right"></i>
+                  <NavLink
+                    className="text-decoration-none text-light"
+                    to="/"
+                    exact
+                  >
+                    Web Development
+                  </NavLink>
                 </li>
                 <li className="pb-2">
-                  <i className='bi-chevron-right'></i>
-                  <NavLink className="text-decoration-none text-light" to="/" exact>Data Analysis</NavLink>
+                  <i className="bi-chevron-right"></i>
+                  <NavLink
+                    className="text-decoration-none text-light"
+                    to="/"
+                    exact
+                  >
+                    Data Analysis
+                  </NavLink>
                 </li>
                 <li className="pb-2">
-                  <i className='bi-chevron-right'></i>
-                  <NavLink className="text-decoration-none text-light" to="/" exact>Digital Marketing</NavLink>
+                  <i className="bi-chevron-right"></i>
+                  <NavLink
+                    className="text-decoration-none text-light"
+                    to="/"
+                    exact
+                  >
+                    Digital Marketing
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -96,12 +170,24 @@ function Footer() {
               <h3 className="pb-lg-3 text-light light-300">For Public</h3>
               <ul className="list-unstyled text-light light-300">
                 <li className="pb-2">
-                  <i className='bi-chevron-right'></i>
-                  <NavLink className="text-decoration-none text-light" to="/" exact>Terms of use</NavLink>
+                  <i className="bi-chevron-right"></i>
+                  <NavLink
+                    className="text-decoration-none text-light"
+                    to="/"
+                    exact
+                  >
+                    Terms of use
+                  </NavLink>
                 </li>
                 <li className="pb-2">
-                  <i className='bi-chevron-right'></i>
-                  <NavLink className="text-decoration-none text-light" to="/" exact>Privacy Policy</NavLink>
+                  <i className="bi-chevron-right"></i>
+                  <NavLink
+                    className="text-decoration-none text-light"
+                    to="/"
+                    exact
+                  >
+                    Privacy Policy
+                  </NavLink>
                 </li>
                 {/* <li className="pb-2">
                   <i className='bi-chevron-right'></i>
@@ -120,7 +206,8 @@ function Footer() {
             <div className="row pt-2">
               <div className="col-lg-6 col-sm-12">
                 <p className="text-lg-start text-center text-light light-300">
-                  &copy; Copyright {(new Date().getFullYear())} All Rights Reserved.
+                  &copy; Copyright {new Date().getFullYear()} All Rights
+                  Reserved.
                 </p>
               </div>
               <div className="col-lg-6 col-sm-12">
@@ -133,7 +220,7 @@ function Footer() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

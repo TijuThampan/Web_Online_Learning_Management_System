@@ -12,6 +12,7 @@ import {
   specificCourseListReducer,
   courseUpdateReducer,
   courseDeleteReducer,
+  courseEnrollReducer,
 } from "./reducers/courseReducers";
 import {
   studentLoginReducer,
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   courseDelete: courseDeleteReducer,
   studentLogin: studentLoginReducer,
   studentRegister: studentRegisterReducer,
+  courseEnroll: courseEnrollReducer,
 });
 
 const teacherInfoFromStorage = localStorage.getItem("teacherInfo")

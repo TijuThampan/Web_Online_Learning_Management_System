@@ -78,7 +78,7 @@ function Navbar() {
                 <>
                   <NavLink
                     className="nav-link text-success"
-                    to="/teacher_dashboard"
+                    to="/teacher/dashboard"
                     exact
                     title="Dashboard"
                   >
@@ -108,7 +108,7 @@ function Navbar() {
                 <>
                   <NavLink
                     className="nav-link text-success"
-                    to="/student_dashboard"
+                    to="/student/dashboard"
                     exact
                     title="Dashboard"
                   >
@@ -146,7 +146,7 @@ function Navbar() {
                   </NavLink>
                   <NavLink
                     className="nav-link"
-                    to="/student_login"
+                    to="/student/login"
                     exact
                     title="Student"
                   >
@@ -154,7 +154,7 @@ function Navbar() {
                   </NavLink>
                   <NavLink
                     className="nav-link"
-                    to="/teacher_login"
+                    to="/teacher/login"
                     exact
                     title="Teacher"
                   >

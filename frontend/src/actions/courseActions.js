@@ -14,15 +14,35 @@ import {
   COURSE_DELETE_REQUEST,
   COURSE_DELETE_SUCCESS,
   COURSE_DELETE_FAIL,
+  COURSE_ENROLL_REQUEST,
+  COURSE_ENROLL_SUCCESS,
+  COURSE_ENROLL_FAIL,
 } from "../constants/courseConstants";
 
 import axios from "axios";
 
-export const listCourses = () => async (dispatch) => {
+export const listCourses = () => async (dispatch, getState) => {
   try {
     dispatch({ type: COURSE_LIST_REQUEST });
 
-    const { data } = await axios.get("/api/course/all");
+    const {
+      studentLogin: { studentInfo },
+    } = getState();
+
+    let data;
+
+    if (studentInfo) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${studentInfo.token}`,
+        },
+      };
+      const response = await axios.get("/api/course/status", config);
+      data = response.data;
+    } else {
+      const response = await axios.get("/api/course/all");
+      data = response.data;
+    }
 
     dispatch({
       type: COURSE_LIST_SUCCESS,
@@ -185,6 +205,52 @@ export const deleteCourse = (id) => async (dispatch, getState) => {
         : error.message;
     dispatch({
       type: COURSE_DELETE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const enrollCourse = (courseId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: COURSE_ENROLL_REQUEST,
+    });
+
+    const {
+      studentLogin: { studentInfo },
+    } = getState();
+
+    if (!studentInfo || !studentInfo.token) {
+      throw new Error("Student not logged in");
+    }
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${studentInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.post(
+      `/api/course/enroll/${courseId}`,
+      { studentId: studentInfo._id },
+      config
+    );
+
+    dispatch({
+      type: COURSE_ENROLL_SUCCESS,
+      payload: data,
+    });
+
+    // Refresh the course list after successful enrollment
+    dispatch(listCourses());
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: COURSE_ENROLL_FAIL,
       payload: message,
     });
   }
