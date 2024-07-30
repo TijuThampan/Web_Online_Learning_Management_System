@@ -113,3 +113,58 @@ export const submitAttempt = asyncHandler(async (req, res) => {
   await attempt.save();
   res.status(200).json({ message: "Attempt submitted successfully", attempt });
 });
+
+// @desc    Get all attempts for student
+// @route   GET /api/exam/attempts
+// @access  Private (Student)
+export const getAllAttempts = asyncHandler(async (req, res) => {
+  const attempts = await Attempt.find()
+    .populate("exam", "exam_name")
+    .populate("student", "stud_name")
+    .populate({
+      path: "exam",
+      populate: {
+        path: "course",
+        select: "course_name",
+      },
+    });
+
+  console.log(attempts[0]);
+
+  const formattedAttempts = attempts.map((attempt) => ({
+    _id: attempt._id,
+    exam_name: attempt.exam.exam_name,
+    course_name: attempt.exam.course.course_name,
+    student_name: attempt.student.stud_name,
+    total_marks: attempt.totalMarks,
+    status: attempt.status,
+    attempt_date: attempt.createdAt,
+  }));
+
+  res.json(formattedAttempts);
+});
+
+// @desc    Delete an attempt
+// @route   DELETE /api/attempt/:id
+// @access  Private (Student)
+export const deleteAttempt = asyncHandler(async (req, res) => {
+  const attemptId = req.params.id;
+  const teacherId = req.user._id;
+
+  const attempt = await Attempt.findById(attemptId);
+
+  if (!attempt) {
+    res.status(404);
+    throw new Error("Attempt not found");
+  }
+
+  // Check if the user is a teacher
+  if (req.user.user_type !== "teacher") {
+    res.status(403);
+    throw new Error("Not authorized. Only teachers can delete attempts");
+  }
+
+  await Attempt.deleteOne({ _id: attemptId });
+
+  res.json({ message: "Attempt deleted successfully" });
+});
