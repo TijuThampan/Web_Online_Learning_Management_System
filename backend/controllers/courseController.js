@@ -1,11 +1,12 @@
 import asyncHandler from "express-async-handler";
 import Course from "../models/courseModel.js";
+import Student from "../models/studentModel.js";
 
 // @desc    Create a course
 // @route   POST /api/course/create
 // @access  Private
 
-const createCourse = asyncHandler(async (req, res) => {
+export const createCourse = asyncHandler(async (req, res) => {
   const { course_name, course_outline, total_units } = req.body;
 
   const course = new Course({
@@ -27,7 +28,7 @@ const createCourse = asyncHandler(async (req, res) => {
 //@desc Fetch all courses
 //@route GET /api/course/all
 //@access Public
-const getCourses = asyncHandler(async (req, res) => {
+export const getCourses = asyncHandler(async (req, res) => {
   const courses = await Course.find({});
 
   res.json(courses);
@@ -36,7 +37,7 @@ const getCourses = asyncHandler(async (req, res) => {
 //@desc Fetch specific courses
 //@route GET /api/course/specific
 //@access Private
-const getSpecificCourses = asyncHandler(async (req, res) => {
+export const getSpecificCourses = asyncHandler(async (req, res) => {
   const courses = await Course.find({});
 
   const courseData = courses.filter((course) => {
@@ -52,7 +53,7 @@ const getSpecificCourses = asyncHandler(async (req, res) => {
 // @route   POST /api/course/update/:id
 // @access  Private
 
-const updateCourse = asyncHandler(async (req, res) => {
+export const updateCourse = asyncHandler(async (req, res) => {
   const { course_name, course_outline, total_units } = req.body;
 
   const course = await Course.findById(req.params.id);
@@ -74,7 +75,7 @@ const updateCourse = asyncHandler(async (req, res) => {
 // @route   POST /api/course/delete/:id
 // @access  Private
 
-const deleteCourse = asyncHandler(async (req, res) => {
+export const deleteCourse = asyncHandler(async (req, res) => {
   const id = req.params.id;
   try {
     await Course.findOneAndDelete({ _id: id });
@@ -86,11 +87,59 @@ const deleteCourse = asyncHandler(async (req, res) => {
     throw new Error("Course not found");
   }
 });
+// @desc    Enroll a student in a course
+// @route   POST /api/course/enroll/:id
+// @access  Private
+export const enrollStudent = asyncHandler(async (req, res) => {
+  const courseId = req.params.id;
+  const studentId = req.body.studentId;
 
-export {
-  createCourse,
-  getCourses,
-  getSpecificCourses,
-  updateCourse,
-  deleteCourse,
-};
+  const course = await Course.findById(courseId);
+  const student = await Student.findById(studentId);
+
+  if (!course || !student) {
+    res.status(404);
+    throw new Error("Course or Student not found");
+  }
+
+  // Check if student is already enrolled
+  if (student.course.includes(courseId)) {
+    res.status(400);
+    throw new Error("Student is already enrolled in this course");
+  }
+
+  // Add course to student's courses
+  student.course.push(courseId);
+  await student.save();
+
+  // Increment total_students in the course
+  course.total_students += 1;
+  await course.save();
+
+  res.status(200).json({
+    message: "Student successfully enrolled in the course",
+    course: course,
+    student: student,
+  });
+});
+
+// @desc    Get all courses with enrollment status for logged-in student
+// @route   GET /api/courses/status
+// @access  Private (Student)
+export const getCoursesWithEnrollmentStatus = asyncHandler(async (req, res) => {
+  const studentId = req.user._id; // Assuming the student's ID is available in req.student after authentication
+
+  // Fetch all courses
+  const courses = await Course.find({});
+
+  // Fetch the student's enrolled courses
+  const student = await Student.findById(studentId).select("course");
+
+  // Map courses to include enrollment status
+  const coursesWithStatus = courses.map((course) => ({
+    ...course.toObject(),
+    isEnrolled: student.course.includes(course._id),
+  }));
+
+  res.json(coursesWithStatus);
+});
