@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Course from "../models/courseModel.js";
+import Exam from "../models/examModel.js";
 import Student from "../models/studentModel.js";
 
 // @desc    Create a course
@@ -78,13 +79,25 @@ export const updateCourse = asyncHandler(async (req, res) => {
 export const deleteCourse = asyncHandler(async (req, res) => {
   const id = req.params.id;
   try {
-    await Course.findOneAndDelete({ _id: id });
+    // Check if there are any exams associated with the course
+    const examsAssociated = await Exam.exists({ course: id });
+
+    if (examsAssociated) {
+      res.status(400);
+      throw new Error("Cannot delete course with associated exams");
+    }
+
+    const deletedCourse = await Course.findOneAndDelete({ _id: id });
+
+    if (!deletedCourse) {
+      res.status(404);
+      throw new Error("Course not found");
+    }
 
     res.json({ message: "The course has been deleted" });
   } catch (error) {
-    res.status(404);
-
-    throw new Error("Course not found");
+    res.status(error.status || 500);
+    throw new Error(error.message || "Error deleting course");
   }
 });
 // @desc    Enroll a student in a course
