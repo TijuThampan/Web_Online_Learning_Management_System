@@ -5,6 +5,7 @@ import {
   getEnrolledExamById,
   getEnrolledExams,
   getExamById,
+  getStudentResults,
   getTeacherExams,
   updateExam,
 } from "../controllers/examController.js";
@@ -18,6 +19,7 @@ const router = express.Router();
 // routes for students
 router.route("/enrolled").get(protectStudent, getEnrolledExams);
 router.route("/enrolled/:id").get(protectStudent, getEnrolledExamById);
+router.route("/results").get(protectStudent, getStudentResults);
 
 router.route("/create").post(protectTeacher, createExam);
 router.route("/teacher").get(protectTeacher, getTeacherExams);

@@ -74,7 +74,7 @@ export const getAttemptQuestions = asyncHandler(async (req, res) => {
 // @access  Private (Student)
 export const submitAttempt = asyncHandler(async (req, res) => {
   const { answers } = req.body;
-  const attempt = await Attempt.findById(req.params.id);
+  const attempt = await Attempt.findById(req.params.id).populate("exam");
 
   if (!attempt) {
     res.status(404);
@@ -91,15 +91,24 @@ export const submitAttempt = asyncHandler(async (req, res) => {
     throw new Error("This attempt has already been submitted");
   }
 
-  // Replace all answers
-  attempt.answers = answers.map(({ questionId, chosenAnswer }) => ({
-    question: questionId,
-    chosenAnswer,
-  }));
+  let totalMarks = 0;
+
+  // Replace all answers and calculate total marks
+  attempt.answers = await Promise.all(
+    answers.map(async ({ question, chosenAnswer }) => {
+      const questionDoc = await Question.findById(question);
+      if (questionDoc && questionDoc.answer === chosenAnswer) {
+        totalMarks += questionDoc.mark;
+      }
+      return {
+        question: question,
+        chosenAnswer,
+      };
+    })
+  );
 
   attempt.status = "submitted";
-
-  // TODO: Calculate total marks based on correct answers
+  attempt.totalMarks = totalMarks;
 
   await attempt.save();
   res.status(200).json({ message: "Attempt submitted successfully", attempt });
