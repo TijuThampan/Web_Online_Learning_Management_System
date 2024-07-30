@@ -20,6 +20,9 @@ import {
   EXAM_UPDATE_FAIL,
   EXAM_UPDATE_REQUEST,
   EXAM_UPDATE_SUCCESS,
+  STUDENT_RESULTS_FAIL,
+  STUDENT_RESULTS_REQUEST,
+  STUDENT_RESULTS_SUCCESS,
 } from "../constants/examConstants";
 
 import axios from "axios";
@@ -248,6 +251,39 @@ export const getEnrolledExamDetails = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: EXAM_ENROLLED_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getStudentResults = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: STUDENT_RESULTS_REQUEST,
+    });
+
+    const {
+      studentLogin: { studentInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${studentInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/exam/results`, config);
+
+    dispatch({
+      type: STUDENT_RESULTS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: STUDENT_RESULTS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

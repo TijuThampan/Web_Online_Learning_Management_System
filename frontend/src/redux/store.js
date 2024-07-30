@@ -23,6 +23,7 @@ import {
   examEnrolledListReducer,
   examListReducer,
   examUpdateReducer,
+  studentResultsReducer,
 } from "./reducers/examReducers";
 import {
   questionCreateReducer,
@@ -58,6 +59,7 @@ const reducer = combineReducers({
   examDetails: examDetailsReducer,
   examEnrolledList: examEnrolledListReducer,
   examEnrolledDetails: examEnrolledDetailsReducer,
+  studentResults: studentResultsReducer,
   questionCreate: questionCreateReducer,
   questionList: questionListReducer,
   questionUpdate: questionUpdateReducer,

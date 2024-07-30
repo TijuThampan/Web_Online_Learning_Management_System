@@ -59,7 +59,7 @@ function StudentDash() {
 
                 <div className="col-xl-3 col-md-4 col-sm-6">
                   <NavLink
-                    to="/student/dashboard"
+                    to="/student/results"
                     exact
                     className="course card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0"
                   >

@@ -2,19 +2,18 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../components/Alert";
 import Spinner from "../../components/Spinner";
-import { listEnrolledExams } from "../../redux/actions/examActions";
+import { getStudentResults } from "../../redux/actions/examActions";
 
 import Footer from "../../components/Footer";
-import TestForStudent from "../../components/student-tests/TestForStudent";
 
-function StudentTests() {
+function StudentResults() {
   const dispatch = useDispatch();
 
-  const examEnrolledList = useSelector((state) => state.examEnrolledList);
-  const { loading, error, exams } = examEnrolledList;
+  const studentResults = useSelector((state) => state.studentResults);
+  const { loading, error, results } = studentResults;
 
   useEffect(() => {
-    dispatch(listEnrolledExams());
+    dispatch(getStudentResults());
   }, [dispatch]);
 
   return (
@@ -24,7 +23,7 @@ function StudentTests() {
           <div className="container text-light d-flex justify-content-center align-items-center py-5 p-0">
             <div className="banner-content col-lg-8 col-12 m-lg-auto text-center">
               <h1 className="banner-heading display-3 pb-5 semi-bold-600 typo-space-line-center">
-                My Exams
+                My Results
               </h1>
             </div>
           </div>
@@ -36,24 +35,32 @@ function StudentTests() {
           <Spinner />
         ) : error ? (
           <Alert type="danger">{error}</Alert>
-        ) : exams.length === 0 ? (
+        ) : results.length === 0 ? (
           <div className="text-center">
-            <h3>No exams found</h3>
-            <p>You are not enrolled in any exams at the moment.</p>
+            <h3>No results found</h3>
+            <p>You haven't completed any exams yet.</p>
           </div>
         ) : (
-          exams.map((exam) => (
-            <TestForStudent
-              key={exam._id}
-              testID={exam._id}
-              exam_name={exam.exam_name}
-              no_of_questions={exam.no_of_questions}
-              total_marks={exam.total_marks}
-              total_time={exam.total_time}
-              course={exam.course.course_name}
-              status={exam.status}
-            />
-          ))
+          <div className="container">
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Exam Name</th>
+                  <th>Course Name</th>
+                  <th>Total Marks</th>
+                </tr>
+              </thead>
+              <tbody>
+                {results.map((result, index) => (
+                  <tr key={index}>
+                    <td>{result.exam_name}</td>
+                    <td>{result.course_name}</td>
+                    <td>{result.total_marks}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </section>
       <Footer />
@@ -61,4 +68,4 @@ function StudentTests() {
   );
 }
 
-export default StudentTests;
+export default StudentResults;

@@ -20,6 +20,9 @@ import {
   EXAM_UPDATE_FAIL,
   EXAM_UPDATE_REQUEST,
   EXAM_UPDATE_SUCCESS,
+  STUDENT_RESULTS_FAIL,
+  STUDENT_RESULTS_REQUEST,
+  STUDENT_RESULTS_SUCCESS,
 } from "../constants/examConstants";
 
 export const examCreateReducer = (state = {}, action) => {
@@ -107,6 +110,19 @@ export const examEnrolledDetailsReducer = (state = { exam: {} }, action) => {
     case EXAM_ENROLLED_DETAILS_SUCCESS:
       return { loading: false, exam: action.payload };
     case EXAM_ENROLLED_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const studentResultsReducer = (state = { results: [] }, action) => {
+  switch (action.type) {
+    case STUDENT_RESULTS_REQUEST:
+      return { loading: true, results: [] };
+    case STUDENT_RESULTS_SUCCESS:
+      return { loading: false, results: action.payload };
+    case STUDENT_RESULTS_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

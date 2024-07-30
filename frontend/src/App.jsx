@@ -19,6 +19,7 @@ import StudentCourses from "./screens/student/StudentCourses";
 import StudentDash from "./screens/student/StudentDash";
 import StudentLogin from "./screens/student/StudentLogin";
 import StudentRegister from "./screens/student/StudentRegister";
+import StudentResults from "./screens/student/StudentResults";
 import StudentTests from "./screens/student/StudentTests";
 import TeacherCourses from "./screens/teacher/TeacherCourses";
 import TeacherDash from "./screens/teacher/TeacherDash";
@@ -59,6 +60,7 @@ export function App() {
             <Route path="dashboard" element={<StudentDash />} />
             <Route path="courses" element={<StudentCourses />} />
             <Route path="tests" element={<StudentTests />} />
+            <Route path="results" element={<StudentResults />} />
             <Route
               path="exam/:examId/attempt/:attemptId"
               element={<StudentAttempt />}
