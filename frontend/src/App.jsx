@@ -18,12 +18,12 @@ import StudentCourses from "./screens/student/StudentCourses";
 import StudentDash from "./screens/student/StudentDash";
 import StudentLogin from "./screens/student/StudentLogin";
 import StudentRegister from "./screens/student/StudentRegister";
-import AddQuestion from "./screens/teacher/AddQuestion";
 import TeacherCourses from "./screens/teacher/TeacherCourses";
 import TeacherDash from "./screens/teacher/TeacherDash";
 import TeacherLogin from "./screens/teacher/TeacherLogin";
 import TeacherRegister from "./screens/teacher/TeacherRegister";
 import TeacherTests from "./screens/teacher/TeacherTests";
+import TeacherTestsQuestions from "./screens/teacher/TeacherTestsQuestions";
 import Tests from "./screens/Tests";
 
 export function App() {
@@ -48,7 +48,10 @@ export function App() {
             <Route path="dashboard" element={<TeacherDash />} />
             <Route path="courses" element={<TeacherCourses />} />
             <Route path="tests" element={<TeacherTests />} />
-            <Route path="add-question" element={<AddQuestion />} />
+            <Route
+              path="tests-questions/:examId"
+              element={<TeacherTestsQuestions />}
+            />
           </Route>
           <Route path="/student" element={<StudentLayout />}>
             <Route path="dashboard" element={<StudentDash />} />

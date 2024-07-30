@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateCourse, deleteCourse } from "../redux/actions/courseActions";
-import { NavLink } from "react-router-dom";
 import Modal from "react-modal";
+import { useDispatch } from "react-redux";
+import { deleteCourse, updateCourse } from "../../redux/actions/courseActions";
 
 const customStyles = {
   content: {
@@ -59,24 +58,13 @@ function CourseForTeacher({ spcfcourses }) {
         >
           <div className="col-md-3 text-center bg-info text-light py-4">
             <i className="display-1 bi-journal-bookmark-fill"></i>
-            <h5 className="semi-bold-600 pb-4 light-300">
-              {spcfcourse.course_name}
-            </h5>
           </div>
           <div className="col-md-6 d-flex align-items-center pl-5 pt-lg-0 pt-4 text-start">
             <ul className="text-left px-4 list-unstyled mb-0 light-300">
-              <li>
-                <i className="bi-circle-fill me-2"></i>
-                {spcfcourse.course_outline}
-              </li>
-              <li>
-                <i className="bi-circle-fill me-2"></i>Total Units:{" "}
-                {spcfcourse.total_units}
-              </li>
-              <li>
-                <i className="bi-circle-fill me-2"></i>Students:{" "}
-                {spcfcourse.total_students}
-              </li>
+              <li>Course Name: {spcfcourse.course_name}</li>
+              <li>Course Outline: {spcfcourse.course_outline}</li>
+              <li>Total Units: {spcfcourse.total_units}</li>
+              <li>Students: {spcfcourse.total_students}</li>
             </ul>
           </div>
           <div className="col-md-3 text-end pt-3 d-flex align-items-center">

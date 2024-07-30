@@ -16,7 +16,6 @@ import TestForTeacher from "../../components/teacher-tests/TestForTeacher";
 function TeacherTests() {
   const [exam_name, setExamName] = useState("");
   const [course, setCourse] = useState("");
-  const [no_of_questions, setNoOfQuestions] = useState("");
   const [total_marks, setTotalMarks] = useState("");
   const [total_time, setTotalTime] = useState("");
 
@@ -56,14 +55,12 @@ function TeacherTests() {
       createExam({
         exam_name,
         course,
-        no_of_questions,
         total_marks,
         total_time,
       })
     );
     setExamName("");
     setCourse("");
-    setNoOfQuestions("");
     setTotalMarks("");
     setTotalTime("");
   };
@@ -129,24 +126,6 @@ function TeacherTests() {
                           ))}
                       </select>
                       <label htmlFor="course light-300">Select Course*</label>
-                    </div>
-                  </div>
-
-                  <div className="col-10 col-lg-6 mb-4">
-                    <div className="form-floating">
-                      <input
-                        type="number"
-                        className="form-control form-control-lg light-300"
-                        id="no_of_questions"
-                        name="no_of_questions"
-                        placeholder="No. of Questions*"
-                        value={no_of_questions}
-                        onChange={(e) => setNoOfQuestions(e.target.value)}
-                        required
-                      />
-                      <label htmlFor="no_of_questions light-300">
-                        No. of Questions*
-                      </label>
                     </div>
                   </div>
 

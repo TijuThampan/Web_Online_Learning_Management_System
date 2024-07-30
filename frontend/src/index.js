@@ -1,12 +1,12 @@
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/js/bootstrap.bundle";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import store from "./redux/store";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
-import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
-import "./index.css";
 import { App } from "./App";
+import "./index.css";
+import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
 
 const root = createRoot(document.getElementById("root"));

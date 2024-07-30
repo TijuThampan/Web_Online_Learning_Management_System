@@ -1,6 +1,6 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { enrollCourse } from "../../redux/actions/courseActions";
 
 function CourseForStudent({ courses }) {
@@ -19,24 +19,13 @@ function CourseForStudent({ courses }) {
         >
           <div className="col-md-3 text-center bg-info text-light py-4">
             <i className="display-1 bi-journal-bookmark-fill"></i>
-            <h5 className="semi-bold-600 pb-4 light-300">
-              {course.course_name}
-            </h5>
           </div>
           <div className="col-md-6 d-flex align-items-center pl-5 pt-lg-0 pt-4 text-start">
             <ul className="text-left px-4 list-unstyled mb-0 light-300">
-              <li>
-                <i className="bi-circle-fill me-2"></i>
-                {course.course_outline}
-              </li>
-              <li>
-                <i className="bi-circle-fill me-2"></i>Total Units:{" "}
-                {course.total_units}
-              </li>
-              <li>
-                <i className="bi-circle-fill me-2"></i>Students:{" "}
-                {course.total_students}
-              </li>
+              <li>Course Name: {course.course_name}</li>
+              <li>Course Outline: {course.course_outline}</li>
+              <li>Total Units: {course.total_units}</li>
+              <li>Students: {course.total_students}</li>
             </ul>
           </div>
           <div className="col-md-3 text-end pt-3 d-flex align-items-center">

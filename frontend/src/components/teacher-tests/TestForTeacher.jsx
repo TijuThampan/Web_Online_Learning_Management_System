@@ -16,7 +16,6 @@ function TestForTeacher({
 }) {
   const [updatedExam, setUpdatedExam] = useState({
     exam_name,
-    no_of_questions,
     total_marks,
     total_time,
   });
@@ -59,38 +58,33 @@ function TestForTeacher({
       <div className="row col-10 m-auto d-flex shadow rounded overflow-hidden bg-white">
         <div className="col-md-3 text-center bg-info text-light py-4">
           <i className="display-1 bi-pencil-square"></i>
-          <h5 className="semi-bold-600 pb-4 light-300">{exam_name}</h5>
         </div>
         <div className="col-md-6 d-flex align-items-center pl-5 pt-lg-0 pt-4 text-start">
           <ul className="text-left px-4 list-unstyled mb-0 light-300">
+            <h5 className="semi-bold-600 pb-2 light-300">
+              Exam Name: {exam_name}
+            </h5>
+            <li>Course: {course}</li>
+            <li>Questions: {no_of_questions}</li>
             <li>
-              <i className="bi-circle-fill me-2"></i>
-              Course: {course}
-            </li>
-            <li>
-              <i className="bi-circle-fill me-2"></i>Questions:{" "}
-              {no_of_questions}
-            </li>
-            <li>
-              <i className="bi-circle-fill me-2"></i>Marks: {total_marks}, Time:{" "}
-              {total_time}mins.
-            </li>
-            <li>
-              <NavLink
-                to={`/add_question/${testID}`}
-                className="btn rounded-pill px-4 mt-3 btn-success"
-              >
-                Add Questions
-              </NavLink>
+              Marks: {total_marks}, Time: {total_time}mins.
             </li>
           </ul>
         </div>
         <div className="col-md-3 text-end pt-3 d-flex align-items-center">
           <div className="w-100 light-300 d-flex d-md-block justify-content-between">
             <p>
+              <NavLink
+                to={`/teacher/tests-questions/${testID}`}
+                className="btn rounded-pill px-4 btn-success"
+              >
+                Questions
+              </NavLink>
+            </p>
+            <p>
               <button
                 type="button"
-                className="btn rounded-pill px-4 btn-outline-primary mb-3"
+                className="btn rounded-pill px-4 btn-outline-primary"
                 onClick={openModal}
               >
                 Update
@@ -114,12 +108,14 @@ function TestForTeacher({
         style={customStyles}
         contentLabel="Update Test Modal"
       >
-        <h5 className="modal-title">Update Test - {testID}</h5>
-        <button
-          onClick={closeModal}
-          className="btn-close"
-          aria-label="Close"
-        ></button>
+        <div className="d-flex justify-content-between pb-2">
+          <h5 className="modal-title">Update Test</h5>
+          <button
+            onClick={closeModal}
+            className="btn-close"
+            aria-label="Close"
+          ></button>
+        </div>
         <form className="row mx-auto w-100" onSubmit={handleUpdate}>
           <div className="modal-body">
             <div className="mb-4">
@@ -135,22 +131,6 @@ function TestForTeacher({
                   required
                 />
                 <label htmlFor="exam_name light-300">Test Name*</label>
-              </div>
-            </div>
-
-            <div className="mb-4">
-              <div className="form-floating">
-                <input
-                  type="number"
-                  className="form-control form-control-lg light-300"
-                  id="no_of_questions"
-                  name="no_of_questions"
-                  placeholder="No. of Questions*"
-                  value={updatedExam.no_of_questions}
-                  onChange={handleInputChange}
-                  required
-                />
-                <label htmlFor="no_of_questions light-300">Questions*</label>
               </div>
             </div>
 

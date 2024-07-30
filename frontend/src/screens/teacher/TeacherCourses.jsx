@@ -7,8 +7,8 @@ import {
   getSpecificCourses,
 } from "../../redux/actions/courseActions";
 
-import CourseForTeacher from "../../components/CourseForTeacher";
 import Footer from "../../components/Footer";
+import CourseForTeacher from "../../components/teacher-courses/CourseForTeacher";
 
 function TeacherCourses() {
   const [coursename, setCourseName] = useState("");

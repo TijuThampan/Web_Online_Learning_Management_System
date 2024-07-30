@@ -195,3 +195,6 @@ footer a.text-light:hover {
   color: #bfbfbf !important;
   transition-duration: 0.15s;
 }
+.form-floating > label {
+  z-index: 0;
+}
