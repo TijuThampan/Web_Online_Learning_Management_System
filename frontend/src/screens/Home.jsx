@@ -2,7 +2,6 @@ import React from "react";
 import Banner from "../components/Banner";
 
 import Features from "../components/Features";
-import Footer from "../components/Footer";
 import Mission from "../components/Mission";
 
 function Home() {
@@ -11,7 +10,6 @@ function Home() {
       <Banner />
       <Mission />
       <Features />
-      <Footer />
     </div>
   );
 }

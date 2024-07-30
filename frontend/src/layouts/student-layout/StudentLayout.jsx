@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer";
 import { StudentNavbar } from "./components/StudentNavbar";
 
 export function StudentLayout() {
@@ -17,6 +18,7 @@ export function StudentLayout() {
     <>
       <StudentNavbar />
       <Outlet />
+      <Footer />
     </>
   );
 }

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import bck from "../../assets/img/workspace.jpg";
-import Footer from "../../components/Footer";
 
 function TeacherDash({ history }) {
   const teacherLogin = useSelector((state) => state.teacherLogin);
@@ -60,7 +59,7 @@ function TeacherDash({ history }) {
                     <div className="course-vertical card-img-overlay d-flex align-items-end">
                       <div className="course-content text-left text-light">
                         <span className="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">
-                          Tests
+                          Exams
                         </span>
                       </div>
                     </div>
@@ -113,7 +112,6 @@ function TeacherDash({ history }) {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

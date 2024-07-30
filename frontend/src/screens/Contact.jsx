@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../components/Footer";
 import banner from "../assets/img/banner-img-01.svg";
 
 function About() {
@@ -174,7 +173,6 @@ function About() {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

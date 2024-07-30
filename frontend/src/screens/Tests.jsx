@@ -1,6 +1,5 @@
 import React from "react";
 import TestBox from "../components/TestBox";
-import Footer from "../components/Footer";
 
 function Tests() {
   return (
@@ -106,7 +105,6 @@ function Tests() {
           />
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

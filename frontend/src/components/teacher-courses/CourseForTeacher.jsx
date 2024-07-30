@@ -1,179 +1,147 @@
 import React, { useState } from "react";
-import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { deleteCourse, updateCourse } from "../../redux/actions/courseActions";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    zIndex: "1000",
-  },
-};
 function CourseForTeacher({ spcfcourses }) {
-  const [courseName, setCourseName] = useState("");
-  const [courseOutline, setCourseOutline] = useState("");
-  const [courseUnits, setCourseUnits] = useState("");
-  const [courseId, setCourseId] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const dispatch = useDispatch();
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    dispatch(updateCourse(courseName, courseOutline, courseUnits, courseId));
-    setCourseName("");
-    setCourseOutline("");
-    setCourseUnits("");
-    setCourseId("");
-    setIsModalOpen(false);
+  const handleUpdate = (course) => {
+    setSelectedCourse(course);
+    setIsModalOpen(true);
   };
 
   const handleDelete = (id) => {
     dispatch(deleteCourse(id));
   };
 
-  const openModal = (spcfcourse) => {
-    setCourseName(spcfcourse.course_name);
-    setCourseOutline(spcfcourse.course_outline);
-    setCourseUnits(spcfcourse.total_units);
-    setCourseId(spcfcourse._id);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(
+      updateCourse(
+        selectedCourse.course_name,
+        selectedCourse.course_outline,
+        selectedCourse.total_units,
+        selectedCourse._id
+      )
+    );
     setIsModalOpen(false);
   };
 
   return (
-    <div className="container text-center">
-      {spcfcourses.map((spcfcourse) => (
-        <div
-          className="row col-10 m-auto d-flex shadow rounded overflow-hidden bg-light my-5"
-          key={spcfcourse._id}
-        >
-          <div className="col-md-3 text-center bg-info text-light py-4">
-            <i className="display-1 bi-journal-bookmark-fill"></i>
-          </div>
-          <div className="col-md-6 d-flex align-items-center pl-5 pt-lg-0 pt-4 text-start">
-            <ul className="text-left px-4 list-unstyled mb-0 light-300">
-              <li>Course Name: {spcfcourse.course_name}</li>
-              <li>Course Outline: {spcfcourse.course_outline}</li>
-              <li>Total Units: {spcfcourse.total_units}</li>
-              <li>Students: {spcfcourse.total_students}</li>
-            </ul>
-          </div>
-          <div className="col-md-3 text-end pt-3 d-flex align-items-center">
-            <div className="w-100 light-300 d-flex d-md-block justify-content-between">
-              <p>
+    <div className="container mt-4">
+      <div className="row">
+        {spcfcourses.map((course) => (
+          <div className="col-md-4 mb-4" key={course._id}>
+            <div className="card h-100">
+              <div className="card-body">
+                <h5 className="card-title">{course.course_name}</h5>
+                <p className="card-text">Outline: {course.course_outline}</p>
+                <ul className="list-unstyled">
+                  <li>Total Units: {course.total_units}</li>
+                  <li>Students Enrolled: {course.total_students}</li>
+                </ul>
+              </div>
+              <div className="card-footer d-flex justify-content-between">
                 <button
-                  type="button"
-                  className="btn rounded-pill px-4 btn-outline-primary mb-3"
-                  onClick={() => openModal(spcfcourse)}
+                  onClick={() => handleUpdate(course)}
+                  className="btn btn-primary w-100 me-2"
                 >
                   Update
                 </button>
-              </p>
-              <p>
                 <button
-                  onClick={() => {
-                    handleDelete(spcfcourse._id);
-                  }}
-                  exact
-                  className="btn rounded-pill px-4 btn-outline-warning"
+                  onClick={() => handleDelete(course._id)}
+                  className="btn btn-danger w-100 ms-2"
                 >
                   Delete
                 </button>
-              </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {isModalOpen && (
+        <div
+          className="modal"
+          style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Update Course</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setIsModalOpen(false)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="courseName" className="form-label">
+                      Course Name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="courseName"
+                      value={selectedCourse.course_name}
+                      onChange={(e) =>
+                        setSelectedCourse({
+                          ...selectedCourse,
+                          course_name: e.target.value,
+                        })
+                      }
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="courseOutline" className="form-label">
+                      Course Outline
+                    </label>
+                    <textarea
+                      className="form-control"
+                      id="courseOutline"
+                      value={selectedCourse.course_outline}
+                      onChange={(e) =>
+                        setSelectedCourse({
+                          ...selectedCourse,
+                          course_outline: e.target.value,
+                        })
+                      }
+                      required
+                      rows="3"
+                    ></textarea>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="totalUnits" className="form-label">
+                      Total Units
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="totalUnits"
+                      value={selectedCourse.total_units}
+                      onChange={(e) =>
+                        setSelectedCourse({
+                          ...selectedCourse,
+                          total_units: e.target.value,
+                        })
+                      }
+                      required
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary">
+                    Save Changes
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      ))}
-
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        contentLabel="Update Course Modal"
-        style={customStyles}
-      >
-        <form className="row mx-auto w-100" onSubmit={submitHandler}>
-          <div className="modal-content">
-            <div
-              className="modal-header"
-              style={{ justifyContent: "space-between", paddingBottom: 12 }}
-            >
-              <h5 className="modal-title" id="exampleModalLabel">
-                Update Course - {courseName}
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                onClick={closeModal}
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <div className="mb-4">
-                <div className="form-floating">
-                  <input
-                    type="text"
-                    className="form-control form-control-lg light-300"
-                    placeholder="Course name*"
-                    value={courseName}
-                    onChange={(event) => {
-                      setCourseName(event.target.value);
-                    }}
-                    required
-                  />
-                  <label htmlFor="coursename light-300">Course Name*</label>
-                </div>
-              </div>
-              <div className="mb-4">
-                <div className="form-floating">
-                  <input
-                    type="number"
-                    className="form-control form-control-lg light-300"
-                    placeholder="No. of Units*"
-                    value={courseUnits}
-                    onChange={(event) => {
-                      setCourseUnits(event.target.value);
-                    }}
-                    required
-                  />
-                  <label htmlFor="units light-300">Units*</label>
-                </div>
-              </div>
-              <div className="mb-4">
-                <div className="form-floating mb-4">
-                  <input
-                    type="text"
-                    className="form-control form-control-lg light-300"
-                    placeholder="Course Outline*"
-                    value={courseOutline}
-                    onChange={(event) => {
-                      setCourseOutline(event.target.value);
-                    }}
-                    required
-                  />
-                  <label htmlFor="outline light-300">Outline*</label>
-                </div>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="submit"
-                className="btn btn-info btn-lg rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300"
-              >
-                Save Changes
-              </button>
-            </div>
-          </div>
-        </form>
-      </Modal>
+      )}
     </div>
   );
 }

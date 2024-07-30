@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listCourses } from "../../redux/actions/courseActions";
-import Alert from "../../components/Alert";
 import Spinner from "../../components/Spinner";
+import { listCourses } from "../../redux/actions/courseActions";
 
-import Footer from "../../components/Footer";
 import CourseForStudent from "../../components/student-courses/CourseForStudent";
 
 function StudentCourses() {
@@ -19,19 +17,9 @@ function StudentCourses() {
 
   return (
     <div>
-      <section>
-        <div id="page_banner2" className="banner-wrapper bg-light w-100 py-5">
-          {/* <StudentNavs /> */}
-          <div className="container text-light d-flex justify-content-center align-items-center py-5 p-0">
-            <div className="banner-content col-lg-8 col-12 m-lg-auto text-center">
-              {error && <Alert type="danger">{error}</Alert>}
-              <h1 className="banner-heading display-3 pb-5 semi-bold-600 typo-space-line-center">
-                Available Courses
-              </h1>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="container d-flex justify-content-between border-b align-items-center py-4">
+        <h2>Available Courses</h2>
+      </div>
 
       {loading ? (
         <Spinner />
@@ -50,8 +38,6 @@ function StudentCourses() {
           <CourseForStudent courses={courses} />
         </section>
       )}
-
-      <Footer />
     </div>
   );
 }

@@ -4,7 +4,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { register } from "../../redux/actions/teacherActions";
 //import Spinner from '../components/Spinner';
 import Alert from "../../components/Alert";
-import Footer from "../../components/Footer";
 
 function TeacherRegister() {
   const navigate = useNavigate();
@@ -200,7 +199,6 @@ function TeacherRegister() {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

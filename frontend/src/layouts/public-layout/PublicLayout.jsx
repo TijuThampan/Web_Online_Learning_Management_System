@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer";
 import { PublicNavbar } from "./components/PublicNavbar";
 
 export function PublicLayout() {
@@ -20,6 +21,7 @@ export function PublicLayout() {
     <>
       <PublicNavbar />
       <Outlet />
+      <Footer />
     </>
   );
 }

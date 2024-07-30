@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listCourses } from "../redux/actions/courseActions";
 import CourseBox from "../components/CourseBox";
-import Footer from "../components/Footer";
+import { listCourses } from "../redux/actions/courseActions";
 
 function Courses() {
   const dispatch = useDispatch();
@@ -100,7 +99,6 @@ function Courses() {
           )}
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Alert from "../../components/Alert";
 import Spinner from "../../components/Spinner";
 import {
   createCourse,
   getSpecificCourses,
 } from "../../redux/actions/courseActions";
 
-import Footer from "../../components/Footer";
 import CourseForTeacher from "../../components/teacher-courses/CourseForTeacher";
 
 function TeacherCourses() {
   const [coursename, setCourseName] = useState("");
   const [units, setUnits] = useState("");
   const [outline, setOutline] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -22,15 +21,12 @@ function TeacherCourses() {
 
   const specificCourseList = useSelector((state) => state.specificCourseList);
   let { loading: scLoading, error: scError, spcfcourses } = specificCourseList;
-  // spcfcourses = spcfcourses.reverse()
 
   const courseUpdate = useSelector((state) => state.courseUpdate);
   const { loading: cuLoading, error: cuError, updatedCourse } = courseUpdate;
 
   const courseDelete = useSelector((state) => state.courseDelete);
   const { loading: dcLoading, error: dcError, courseDeleted } = courseDelete;
-
-  console.log("spcfcourses", spcfcourses);
 
   useEffect(() => {
     dispatch(getSpecificCourses());
@@ -42,95 +38,92 @@ function TeacherCourses() {
     setCourseName("");
     setUnits("");
     setOutline("");
+    setIsModalOpen(false);
   };
+
+  const isLoading = loading || scLoading || cuLoading || dcLoading;
 
   return (
     <div>
-      <section>
-        <div id="page_banner2" className="banner-wrapper bg-light w-100 py-5">
-          <div className="container text-light d-flex justify-content-center align-items-center py-5 p-0">
-            <div className="banner-content col-lg-8 col-12 m-lg-auto text-center">
-              {error && <Alert type="danger">{error}</Alert>}
-              {course && (
-                <Alert type="success">Course added successfully</Alert>
-              )}
-              <h1 className="banner-heading display-3 pb-5 semi-bold-600 typo-space-line-center">
-                Manage Courses
-              </h1>
-              <div className="col-md-8 mx-auto my-5 text-center text-dark">
-                <form
-                  className="contact_form row d-flex justify-content-center mx-0"
-                  onSubmit={submitHandler}
-                >
-                  <div className="col-10 col-lg-6 mb-4">
-                    <div className="form-floating">
-                      <input
-                        type="text"
-                        className="form-control form-control-lg light-300"
-                        id="coursename"
-                        name="coursename"
-                        placeholder="Course name*"
-                        value={coursename}
-                        onChange={(event) => {
-                          setCourseName(event.target.value);
-                        }}
-                        required
-                      />
-                      <label for="coursename light-300">Course Name*</label>
-                    </div>
+      <div className="container d-flex justify-content-between border-b align-items-center py-4">
+        <h2>Manage Courses</h2>
+        <button
+          className="btn btn-primary"
+          onClick={() => setIsModalOpen(true)}
+        >
+          Create New Course
+        </button>
+      </div>
+
+      {isModalOpen && (
+        <div
+          className="modal"
+          style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Create New Course</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setIsModalOpen(false)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <form onSubmit={submitHandler}>
+                  <div className="mb-3">
+                    <label htmlFor="coursename" className="form-label">
+                      Course Name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="coursename"
+                      value={coursename}
+                      onChange={(e) => setCourseName(e.target.value)}
+                      required
+                    />
                   </div>
-                  <div className="col-10 col-lg-6 mb-4">
-                    <div className="form-floating">
-                      <input
-                        type="number"
-                        className="form-control form-control-lg light-300"
-                        id="units"
-                        name="units"
-                        placeholder="No. of Units*"
-                        value={units}
-                        onChange={(event) => {
-                          setUnits(event.target.value);
-                        }}
-                        required
-                      />
-                      <label for="units light-300">Units*</label>
-                    </div>
+                  <div className="mb-3">
+                    <label htmlFor="units" className="form-label">
+                      Units
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="units"
+                      value={units}
+                      onChange={(e) => setUnits(e.target.value)}
+                      required
+                    />
                   </div>
-                  <div className="col-10 col-lg-12 mb-4">
-                    <div className="form-floating mb-4">
-                      <input
-                        type="text"
-                        className="form-control form-control-lg light-300"
-                        id="outline"
-                        name="outline"
-                        placeholder="Course Outline*"
-                        value={outline}
-                        onChange={(event) => {
-                          setOutline(event.target.value);
-                        }}
-                        required
-                      />
-                      <label for="outline light-300">Outline*</label>
-                    </div>
+                  <div className="mb-3">
+                    <label htmlFor="outline" className="form-label">
+                      Course Outline
+                    </label>
+                    <textarea
+                      className="form-control"
+                      id="outline"
+                      value={outline}
+                      onChange={(e) => setOutline(e.target.value)}
+                      required
+                      rows="3"
+                    ></textarea>
                   </div>
-                  <div className="col-md-12 col-10 mx-auto my-3">
-                    <button
-                      type="submit"
-                      className="btn btn-info btn-lg rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300"
-                    >
-                      Save Course
-                    </button>
-                  </div>
+                  <button type="submit" className="btn btn-primary">
+                    Save Course
+                  </button>
                 </form>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      )}
 
-      {scLoading ? (
+      {isLoading ? (
         <Spinner />
-      ) : !spcfcourses ? (
+      ) : !spcfcourses || spcfcourses.length === 0 ? (
         <section className="bg-light text-center py-5 w-100 min__height">
           <h2>
             <i
@@ -145,8 +138,6 @@ function TeacherCourses() {
           <CourseForTeacher spcfcourses={spcfcourses} />
         </section>
       )}
-
-      <Footer />
     </div>
   );
 }

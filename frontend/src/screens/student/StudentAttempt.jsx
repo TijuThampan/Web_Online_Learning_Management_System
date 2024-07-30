@@ -29,12 +29,6 @@ function StudentAttempt() {
     dispatch(getAttemptQuestions(attemptId));
   }, [dispatch, attemptId]);
 
-  useEffect(() => {
-    if (submitSuccess) {
-      navigate(`/exam/${examId}/result`);
-    }
-  }, [submitSuccess, navigate, examId]);
-
   const handleAnswerSelect = (questionId, optionId) => {
     setSelectedAnswers((prev) => {
       const existingAnswerIndex = prev.findIndex(
@@ -54,10 +48,10 @@ function StudentAttempt() {
   };
 
   const handleSubmitAttempt = () => {
-    dispatch(submitAttempt(attemptId, selectedAnswers));
+    dispatch(submitAttempt(attemptId, selectedAnswers)).then(() => {
+      navigate(`/student/results`);
+    });
   };
-
-  console.log("questions", questions);
 
   return (
     <div className="container py-5">

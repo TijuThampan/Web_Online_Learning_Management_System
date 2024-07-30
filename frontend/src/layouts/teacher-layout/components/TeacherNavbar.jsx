@@ -57,7 +57,7 @@ export function TeacherNavbar() {
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/teacher/tests" exact>
-                  Tests
+                  Exams
                 </NavLink>
               </li>
             </ul>

@@ -58,6 +58,16 @@ export function StudentNavbar() {
                   Courses
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/student/tests" exact>
+                  Exams
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/student/results" exact>
+                  Results
+                </NavLink>
+              </li>
             </ul>
             <div className="navbar align-self-center d-flex">
               {studentInfo ? (
