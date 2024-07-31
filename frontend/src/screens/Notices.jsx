@@ -22,13 +22,13 @@ function About() {
                 Keep youself updated. Check out and try to join our various
                 events, seminars, webinars and workshops regularly.
               </p>
-              <p className="text-muted">
+              {/* <p className="text-muted">
                 Vector illustration credit goes to{" "}
                 <a rel="noreferrer" href="http://freepik.com/" target="_blank">
                   FreePik
                 </a>{" "}
                 website.
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@ function About() {
                   target="_blank"
                   href="https://www.freepik.com/vectors/mockup"
                 >
-                  Mockup vector created by macrovector - www.freepik.com
+                  {/* Mockup vector created by macrovector - www.freepik.com */}
                 </a>
               </p>
             </div>

@@ -74,7 +74,7 @@ function Footer() {
                 </li>
               </ul>
             </div>
-            <div className="col-lg-3 col-md-4 my-sm-0 mt-4">
+            {/* <div className="col-lg-3 col-md-4 my-sm-0 mt-4">
               <h3 className="pb-lg-3 text-light light-300">Quick Links</h3>
               <ul className="list-unstyled text-light light-300">
                 <li className="pb-2">
@@ -118,9 +118,9 @@ function Footer() {
                   </NavLink>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
-            <div className="col-lg-3 col-md-4 my-sm-0 mt-4">
+            {/* <div className="col-lg-3 col-md-4 my-sm-0 mt-4">
               <h3 className="pb-lg-3 text-light light-300">Latest Courses</h3>
               <ul className="list-unstyled text-light light-300">
                 <li className="pb-2">
@@ -164,9 +164,9 @@ function Footer() {
                   </NavLink>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
-            <div className="col-lg-3 col-md-4 my-sm-0 mt-4">
+            {/* <div className="col-lg-3 col-md-4 my-sm-0 mt-4">
               <h3 className="pb-lg-3 text-light light-300">For Public</h3>
               <ul className="list-unstyled text-light light-300">
                 <li className="pb-2">
@@ -189,16 +189,16 @@ function Footer() {
                     Privacy Policy
                   </NavLink>
                 </li>
-                {/* <li className="pb-2">
+                <li className="pb-2">
                   <i className='bi-chevron-right'></i>
                   <NavLink className="text-decoration-none text-light" to="/contact" exact>Contact</NavLink>
                 </li>
                 <li className="pb-2">
                   <i className='bi-chevron-right'></i>
                   <a className="text-decoration-none text-light" href="mailto:0n3.a77@gmail.com">0n3.a77@gmail.com</a>
-                </li> */}
+                </li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="w-100 bg-primary py-3">

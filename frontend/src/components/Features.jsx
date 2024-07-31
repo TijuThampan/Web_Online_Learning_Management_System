@@ -36,7 +36,7 @@ function Features() {
                   target="_blank"
                   href="https://www.freepik.com/vectors/mockup"
                 >
-                  Mockup vector created by macrovector - www.freepik.com
+                  {/* Mockup vector created by macrovector - www.freepik.com */}
                 </a>
               </p>
             </div>

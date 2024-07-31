@@ -14,7 +14,7 @@ function About() {
                 If you have any query or suggestions for us, please feel free to
                 reach out. We'll get back to you as soon as possible.
               </p>
-              <p className="text-muted">
+              {/* <p className="text-muted">
                 Vector illustration credit goes to{" "}
                 <a
                   rel="noreferrer"
@@ -24,7 +24,7 @@ function About() {
                   StorySet
                 </a>
                 .
-              </p>
+              </p> */}
             </div>
             <div className="contact-img col-lg-5 align-items-end col-md-4">
               <figure className="td_figure">
@@ -78,8 +78,8 @@ function About() {
               </div>
               <ul className="contact-info list-unstyled col-lg-9 col-9 light-300">
                 <li className="h5 mb-0">Address</li>
-                <li className="text-muted">Assam</li>
-                <li className="text-muted">India</li>
+                <li className="text-muted">Dublin</li>
+                <li className="text-muted">Ireland</li>
               </ul>
             </div>
           </div>
