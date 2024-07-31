@@ -5,10 +5,12 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
+    
     "start": "node backend/server",
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+  "build": "cd frontend && npm install && npm run build && cd ../backend && npm install && powershell -Command \"Copy-Item -Path '../frontend/build/*' -Destination './public/' -Recurse -Force\" "
   },
   "author": "Tiju Susan Thampan",
   "license": "ISC",
